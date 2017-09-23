@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.domain;
+package com.pedrolopesme.android.bakingapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Recipe domain object
+ * Recipe model object
  */
-final public class Recipe implements Parcelable {
+public final class Recipe implements Parcelable {
 
     private int id;
     private String name;
@@ -77,7 +77,7 @@ final public class Recipe implements Parcelable {
                 ", steps=" + steps +
                 '}';
     }
-    
+
     @Override
     public int describeContents() {
         return 0;

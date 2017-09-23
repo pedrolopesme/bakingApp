@@ -1,12 +1,12 @@
-package com.pedrolopesme.android.bakingapp.domain;
+package com.pedrolopesme.android.bakingapp.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Ingredient domain class
+ * Ingredient model class
  */
-final public class Ingredient implements Parcelable {
+public final class Ingredient implements Parcelable {
 
     private int quantity;
     private String measure;
