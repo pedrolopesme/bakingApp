@@ -9,7 +9,9 @@ import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ItemViewModel;
 import java.util.ArrayList;
 
 /**
- * Recycler View Adapter
+ * Recycler View Base Adapter
+ * <p>
+ * In order to create RV adapters, you need to have a Model and an ItemViewModel for that model.
  */
 public abstract class RecyclerViewAdapter<ITEM_T, VIEW_MODEL_T extends ItemViewModel<ITEM_T>>
         extends RecyclerView.Adapter<RecyclerViewAdapter.ItemViewHolder<ITEM_T, VIEW_MODEL_T>> {

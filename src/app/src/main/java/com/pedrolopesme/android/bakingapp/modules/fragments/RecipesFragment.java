@@ -16,15 +16,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Base Fragment
+ * Recipes Fragment.
+ * <p>
+ * This fragment shows an recycler view with recipes, so it uses an
+ * RecipesViewModel which implements an RecyclerViewViewModel
  */
-public class RecipesFragment extends ViewModelFragment {
+public final class RecipesFragment extends ViewModelFragment {
 
     private RecipesViewModel recipeRecyclerView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recipes, container, false);
         ButterKnife.bind(this, root);
         FragmentRecipesBinding binding = FragmentRecipesBinding.bind(root);
@@ -34,7 +37,7 @@ public class RecipesFragment extends ViewModelFragment {
 
     @Nullable
     @Override
-    protected ViewModel createViewModel(@Nullable ViewModel.State savedViewModelState) {
+    protected ViewModel createViewModel(final @Nullable ViewModel.State savedViewModelState) {
         recipeRecyclerView = new RecipesViewModel(getContext(), savedViewModelState);
         return recipeRecyclerView;
     }
@@ -43,6 +46,5 @@ public class RecipesFragment extends ViewModelFragment {
     void onClick() {
         recipeRecyclerView.onClick(getActivity());
     }
-
 
 }

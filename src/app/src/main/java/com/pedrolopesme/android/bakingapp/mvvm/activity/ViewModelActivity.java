@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
 /**
- * View Model Activity
+ * View Model Activity Base Class
  */
 public abstract class ViewModelActivity extends AppCompatActivity {
 
@@ -15,9 +15,20 @@ public abstract class ViewModelActivity extends AppCompatActivity {
 
     private ViewModel viewModel;
 
+    /**
+     * Creates ViewModel for an Activity
+     *
+     * @param savedViewModelState
+     * @return viewModel object
+     */
     @Nullable
     protected abstract ViewModel createViewModel(@Nullable ViewModel.State savedViewModelState);
 
+    /**
+     * Runs onCreate trying to restore viewModelState from bundle
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +48,11 @@ public abstract class ViewModelActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Saves viewModel state into bundle
+     *
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

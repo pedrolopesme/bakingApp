@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.pedrolopesme.android.bakingapp.modules.recipes.RecipeViewModel" />
+            type="com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

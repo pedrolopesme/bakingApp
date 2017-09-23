@@ -10,7 +10,6 @@ import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 /**
  * Recycler View View Model
  */
-
 public abstract class RecyclerViewViewModel extends ViewModel {
 
     RecyclerView.LayoutManager layoutManager;

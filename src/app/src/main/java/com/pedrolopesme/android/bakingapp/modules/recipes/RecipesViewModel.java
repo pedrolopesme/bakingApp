@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.model.Recipe;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
@@ -17,14 +18,16 @@ import java.util.ArrayList;
 /**
  * Recipe Recycler View ViewModel
  */
-public class RecipesViewModel extends RecyclerViewViewModel {
+public final class RecipesViewModel extends RecyclerViewViewModel {
 
+    private final String TAG_LOG = this.getClass().getSimpleName();
     private final Context appContext;
 
     RecipeListAdapter adapter;
 
-    public RecipesViewModel(Context context, @Nullable State savedInstanceState) {
+    public RecipesViewModel(final Context context, final @Nullable State savedInstanceState) {
         super(savedInstanceState);
+        Log.d(TAG_LOG, "Creating RecipesViewModel");
         appContext = context.getApplicationContext();
 
         ArrayList<Recipe> recipes;
@@ -35,6 +38,7 @@ public class RecipesViewModel extends RecyclerViewViewModel {
         }
         adapter = new RecipeListAdapter();
         adapter.setItems(recipes);
+        Log.d(TAG_LOG, "RecipesViewModel created");
     }
 
     @Override
@@ -52,14 +56,20 @@ public class RecipesViewModel extends RecyclerViewViewModel {
         return new RecipeState(this);
     }
 
-    public void onClick(Activity activity) {
+    public void onClick(final Activity activity) {
         try {
+            Log.d(TAG_LOG, "Firing onClick on RecipesViewModel");
             // Do something on click
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * TODO replace this with the real data source
+     *
+     * @return recipes list
+     */
     private ArrayList<Recipe> getRecipes() {
         ArrayList<Recipe> recipes = new ArrayList<>();
 
@@ -84,35 +94,34 @@ public class RecipesViewModel extends RecyclerViewViewModel {
         return recipes;
     }
 
-
     private static class RecipeState extends RecyclerViewViewModelState {
 
         private final ArrayList<Recipe> recipes;
 
-        public RecipeState(RecipesViewModel viewModel) {
+        public RecipeState(final RecipesViewModel viewModel) {
             super(viewModel);
             recipes = viewModel.adapter.getItems();
         }
 
-        public RecipeState(Parcel in) {
+        public RecipeState(final Parcel in) {
             super(in);
             recipes = in.createTypedArrayList(Recipe.CREATOR);
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
+        public void writeToParcel(final Parcel dest, final int flags) {
             super.writeToParcel(dest, flags);
             dest.writeTypedList(recipes);
         }
 
         public static Creator<RecipeState> CREATOR = new Creator<RecipeState>() {
             @Override
-            public RecipeState createFromParcel(Parcel source) {
+            public RecipeState createFromParcel(final Parcel source) {
                 return new RecipeState(source);
             }
 
             @Override
-            public RecipeState[] newArray(int size) {
+            public RecipeState[] newArray(final int size) {
                 return new RecipeState[size];
             }
         };

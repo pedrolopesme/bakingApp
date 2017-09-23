@@ -12,28 +12,28 @@ import com.pedrolopesme.android.bakingapp.modules.fragments.RecipesFragment;
 /**
  * Recipes Activity - Main Activity
  */
-public class RecipesActivity extends AppCompatActivity {
+public final class RecipesActivity extends AppCompatActivity {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
+
     private static final String TAG_RECIPES_FRAGMENT = "recipesFragment";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG_LOG, "Creating RecipesActivity");
+    protected void onCreate(final Bundle savedInstanceState) {
+        Log.d(TAG_LOG, "Creating RecipesActivity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baking_list);
 
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag(TAG_RECIPES_FRAGMENT);
         if (fragment == null) {
-            Log.i(TAG_LOG, "Creating RecipesFragment");
+            Log.d(TAG_LOG, "Creating RecipesFragment");
             fragment = new RecipesFragment();
             fm.beginTransaction()
                     .add(R.id.fragmentContainer, fragment, TAG_RECIPES_FRAGMENT)
                     .commit();
 
-            Log.i(TAG_LOG, "Fragment Created");
+            Log.d(TAG_LOG, "Fragment Created");
         }
     }
-
 }
