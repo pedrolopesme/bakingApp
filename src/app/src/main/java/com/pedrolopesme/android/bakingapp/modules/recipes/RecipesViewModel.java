@@ -22,8 +22,7 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
     private final Context appContext;
-
-    RecipeListAdapter adapter;
+    private final RecipeListAdapter adapter;
 
     public RecipesViewModel(final Context context, final @Nullable State savedInstanceState) {
         super(savedInstanceState);
@@ -36,7 +35,7 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
         } else {
             recipes = getRecipes();
         }
-        adapter = new RecipeListAdapter();
+        adapter = new RecipeListAdapter(context);
         adapter.setItems(recipes);
         Log.d(TAG_LOG, "RecipesViewModel created");
     }
@@ -54,15 +53,6 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
     @Override
     public RecyclerViewViewModelState getInstanceState() {
         return new RecipeState(this);
-    }
-
-    public void onClick(final Activity activity) {
-        try {
-            Log.d(TAG_LOG, "Firing onClick on RecipesViewModel");
-            // Do something on click
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**

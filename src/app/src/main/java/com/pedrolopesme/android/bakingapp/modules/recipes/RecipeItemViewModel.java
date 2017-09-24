@@ -1,9 +1,13 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.Bindable;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.model.Recipe;
+import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ItemViewModel;
 
 /**
@@ -21,9 +25,14 @@ public final class RecipeItemViewModel extends ItemViewModel<Recipe> {
         notifyChange();
     }
 
-    public void onClick() {
+    /**
+     * Opens a Recipe Activity from the current recipe item
+     *
+     * @param context
+     */
+    public void onClick(Context context) {
         Log.d(TAG_LOG, "Firing onClick on recipe:" + recipe);
-//        notifyPropertyChanged(BR.);
+        context.startActivity(new Intent(context, RecipeActivity.class));
     }
 
     @Bindable

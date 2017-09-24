@@ -1,5 +1,6 @@
 package com.pedrolopesme.android.bakingapp.modules.adapter;
 
+import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,17 @@ import butterknife.OnClick;
 public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeItemViewModel> {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
+
+    private final Context context;
+
+    /**
+     * Starts RecipeListAdapter injecting application context
+     *
+     * @param context
+     */
+    public RecipeListAdapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public RecipeViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -48,7 +60,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
         return items;
     }
 
-    static class RecipeViewHolder
+    class RecipeViewHolder
             extends ItemViewHolder<Recipe, RecipeItemViewModel> {
 
         private final String TAG_LOG = this.getClass().getSimpleName();
@@ -62,7 +74,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
         @OnClick(R.id.tv_recipe_name)
         void onClickRecipeItem() {
             Log.d(TAG_LOG, "Firing onClick on RecipeViewHolder");
-            viewModel.onClick();
+            viewModel.onClick(context);
         }
     }
 

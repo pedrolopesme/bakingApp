@@ -42,9 +42,4 @@ public final class RecipesFragment extends ViewModelFragment {
         return recipeRecyclerView;
     }
 
-    @OnClick(R.id.tv_recipe_name)
-    void onClick() {
-        recipeRecyclerView.onClick(getActivity());
-    }
-
 }
