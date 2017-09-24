@@ -9,7 +9,7 @@ import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 /**
  * View Model Activity Base Class
  */
-public abstract class ViewModelActivity extends AppCompatActivity {
+public abstract class ViewModelActivity extends BaseActivity {
 
     private static final String EXTRA_VIEW_MODEL_STATE = "viewModelState";
 

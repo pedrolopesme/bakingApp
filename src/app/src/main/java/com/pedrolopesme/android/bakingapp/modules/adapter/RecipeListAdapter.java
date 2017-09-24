@@ -44,7 +44,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
                 .from(parent.getContext())
                 .inflate(R.layout.item_recipe, parent, false);
 
-        RecipeItemViewModel viewModel = new RecipeItemViewModel();
+        RecipeItemViewModel viewModel = new RecipeItemViewModel(context);
         ItemRecipeBinding binding = ItemRecipeBinding.bind(itemView);
         binding.setViewModel(viewModel);
         return new RecipeViewHolder(itemView, binding, viewModel);
@@ -74,7 +74,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
         @OnClick(R.id.tv_recipe_name)
         void onClickRecipeItem() {
             Log.d(TAG_LOG, "Firing onClick on RecipeViewHolder");
-            viewModel.onClick(context);
+            viewModel.onClick();
         }
     }
 

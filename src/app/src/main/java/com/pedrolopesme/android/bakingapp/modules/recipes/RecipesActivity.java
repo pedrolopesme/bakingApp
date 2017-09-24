@@ -8,11 +8,12 @@ import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.modules.fragments.RecipesFragment;
+import com.pedrolopesme.android.bakingapp.mvvm.activity.BaseActivity;
 
 /**
  * Recipes Activity - Main Activity
  */
-public final class RecipesActivity extends AppCompatActivity {
+public final class RecipesActivity extends BaseActivity {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
 
@@ -22,6 +23,7 @@ public final class RecipesActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         Log.d(TAG_LOG, "Creating RecipesActivity");
         super.onCreate(savedInstanceState);
+        renderActionBar(getString(R.string.activity_recipes));
         setContentView(R.layout.activity_baking_list);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -36,4 +38,5 @@ public final class RecipesActivity extends AppCompatActivity {
             Log.d(TAG_LOG, "Fragment Created");
         }
     }
+
 }

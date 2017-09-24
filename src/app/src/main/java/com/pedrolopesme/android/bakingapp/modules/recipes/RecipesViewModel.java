@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.model.Recipe;
+import com.pedrolopesme.android.bakingapp.model.Step;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 import com.pedrolopesme.android.bakingapp.modules.adapter.RecipeListAdapter;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.RecyclerViewViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Recipe Recycler View ViewModel
@@ -67,6 +69,10 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
         recipe.setId(1);
         recipe.setName("Teste");
         recipe.setServings(3);
+
+        List<Step> steps = new ArrayList<>();
+        steps.add(new Step());
+        recipe.setSteps(steps);
         recipes.add(recipe);
 
         Recipe recipe2 = new Recipe();

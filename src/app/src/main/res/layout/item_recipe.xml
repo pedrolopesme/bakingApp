@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel" />
@@ -11,7 +12,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="120dp"
         android:background="@color/colorAccent">
 
         <ImageView
@@ -51,6 +52,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:fontFamily="sans-serif"
+            android:text="@{viewModel.level}"
             android:textColor="@color/mainTextColor"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -62,8 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="0dp"
             android:fontFamily="sans-serif"
+            android:text="@{viewModel.servings}"
             android:textColor="@color/mainTextColor"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -76,7 +79,7 @@
             android:layout_width="20sp"
             android:layout_height="22sp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="0dp"
             android:contentDescription="@string/image_servings_description"
             app:layout_constraintRight_toLeftOf="@+id/tv_servings"
             app:layout_constraintTop_toBottomOf="@+id/tv_recipe_name"
