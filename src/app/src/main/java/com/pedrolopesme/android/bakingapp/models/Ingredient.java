@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.model;
+package com.pedrolopesme.android.bakingapp.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

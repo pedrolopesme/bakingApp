@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.ItemRecipeBinding;
-import com.pedrolopesme.android.bakingapp.model.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 

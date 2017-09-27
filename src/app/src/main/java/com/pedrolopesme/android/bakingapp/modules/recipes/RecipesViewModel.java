@@ -1,6 +1,5 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
@@ -8,8 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.pedrolopesme.android.bakingapp.model.Recipe;
-import com.pedrolopesme.android.bakingapp.model.Step;
+import com.pedrolopesme.android.bakingapp.models.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 import com.pedrolopesme.android.bakingapp.modules.adapter.RecipeListAdapter;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.RecyclerViewViewModel;

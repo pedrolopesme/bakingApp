@@ -1,13 +1,12 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.Bindable;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
-import com.pedrolopesme.android.bakingapp.model.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ItemViewModel;
 import com.pedrolopesme.android.bakingapp.utils.RecipeLevelCalculatorUtil;
