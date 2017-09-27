@@ -71,7 +71,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
             ButterKnife.bind(this, itemView);
         }
 
-        @OnClick(R.id.tv_recipe_name)
+        @OnClick(R.id.cl_recipe_item)
         void onClickRecipeItem() {
             Log.d(TAG_LOG, "Firing onClick on RecipeViewHolder");
             viewModel.onClick();

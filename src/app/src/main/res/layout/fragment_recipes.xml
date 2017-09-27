@@ -15,18 +15,10 @@
         tools:context="com.pedrolopesme.android.bakingapp.modules.recipes.RecipesActivity">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rv_recipes"
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
             bind:recyclerViewViewModel="@{viewModel}" />
-
-        <TextView
-            android:id="@+id/tv_recipe_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            tools:text="Recipe Name" />
-
     </LinearLayout>
 </layout>

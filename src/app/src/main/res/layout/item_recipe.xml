@@ -13,6 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="fill_parent"
         android:layout_height="120dp"
+        android:id="@+id/cl_recipe_item"
         android:background="@color/colorAccent">
 
         <ImageView

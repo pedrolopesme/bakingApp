@@ -10,6 +10,7 @@ public class RecipeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        renderActionBar(getString(R.string.activity_recipe));
         setContentView(R.layout.activity_recipe);
     }
 
