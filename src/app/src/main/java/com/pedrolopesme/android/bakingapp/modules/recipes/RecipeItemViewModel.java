@@ -1,13 +1,11 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.Bindable;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ItemViewModel;
 import com.pedrolopesme.android.bakingapp.utils.RecipeLevelCalculatorUtil;
 
@@ -18,10 +16,12 @@ public final class RecipeItemViewModel extends ItemViewModel<Recipe> {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
     private Recipe recipe;
+    private RecipesNavigation recipesNavigation;
     private Context context;
 
-    public RecipeItemViewModel(Context context) {
-        this.context = context;
+    public RecipeItemViewModel(RecipesNavigation recipeNavigation) {
+        this.recipesNavigation = recipeNavigation;
+        this.context = recipeNavigation.getContext();
     }
 
     @Override
@@ -36,7 +36,7 @@ public final class RecipeItemViewModel extends ItemViewModel<Recipe> {
      */
     public void onClick() {
         Log.d(TAG_LOG, "Firing onClick on recipe:" + recipe);
-        context.startActivity(new Intent(context, RecipeActivity.class));
+        recipesNavigation.navigate(recipe);
     }
 
     @Bindable

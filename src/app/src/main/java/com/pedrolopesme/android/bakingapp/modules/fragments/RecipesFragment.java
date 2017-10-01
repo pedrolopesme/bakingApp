@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipesBinding;
+import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
 import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Recipes Fragment.
@@ -23,23 +23,44 @@ import butterknife.OnClick;
  */
 public final class RecipesFragment extends ViewModelFragment {
 
-    private RecipesViewModel recipeRecyclerView;
+    public static final String COLUMNS_BUNDLE_NAME = "recipesFragmentName";
+    private RecipesViewModel recipesRecyclerView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
+
         View root = inflater.inflate(R.layout.fragment_recipes, container, false);
         ButterKnife.bind(this, root);
         FragmentRecipesBinding binding = FragmentRecipesBinding.bind(root);
-        binding.setViewModel(recipeRecyclerView);
+        binding.setViewModel(recipesRecyclerView);
         return root;
     }
 
     @Nullable
     @Override
     protected ViewModel createViewModel(final @Nullable ViewModel.State savedViewModelState) {
-        recipeRecyclerView = new RecipesViewModel(getContext(), savedViewModelState);
-        return recipeRecyclerView;
+        recipesRecyclerView = new RecipesViewModel(createRecipesNavigation(), getContext(), savedViewModelState);
+        return recipesRecyclerView;
+    }
+
+    /**
+     * Creates recipes navigation
+     *
+     * @return recipes navigation
+     */
+    private RecipesNavigation createRecipesNavigation() {
+        Bundle bundle = getArguments();
+        int panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
+
+        switch (panels) {
+            case 1:
+                return new RecipesNavigation(RecipesNavigation.Panels.ONE, getContext(), getFragmentManager());
+            case 2:
+                return new RecipesNavigation(RecipesNavigation.Panels.TWO, getContext(), getFragmentManager());
+            default:
+                return new RecipesNavigation(RecipesNavigation.Panels.ONE, getContext(), getFragmentManager());
+        }
     }
 
 }

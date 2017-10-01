@@ -25,7 +25,7 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
     private final Context appContext;
     private final RecipeListAdapter adapter;
 
-    public RecipesViewModel(final Context context, final @Nullable State savedInstanceState) {
+    public RecipesViewModel(final RecipesNavigation recipesNavigation, final Context context, final @Nullable State savedInstanceState) {
         super(savedInstanceState);
         Log.d(TAG_LOG, "Creating RecipesViewModel");
         appContext = context.getApplicationContext();
@@ -36,7 +36,7 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
         } else {
             recipes = getRecipes();
         }
-        adapter = new RecipeListAdapter(context);
+        adapter = new RecipeListAdapter(recipesNavigation);
         adapter.setItems(recipes);
         Log.d(TAG_LOG, "RecipesViewModel created");
     }
