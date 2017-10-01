@@ -11,6 +11,7 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.ItemRecipeBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel;
+import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -25,15 +26,15 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
 
     private final String TAG_LOG = this.getClass().getSimpleName();
 
-    private final Context context;
+    private RecipesNavigation recipesNavigation;
 
     /**
      * Starts RecipeListAdapter injecting application context
      *
-     * @param context
+     * @param recipesNavigation navigator
      */
-    public RecipeListAdapter(Context context) {
-        this.context = context;
+    public RecipeListAdapter(RecipesNavigation recipesNavigation) {
+        this.recipesNavigation = recipesNavigation;
     }
 
     @Override
@@ -44,7 +45,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
                 .from(parent.getContext())
                 .inflate(R.layout.item_recipe, parent, false);
 
-        RecipeItemViewModel viewModel = new RecipeItemViewModel(context);
+        RecipeItemViewModel viewModel = new RecipeItemViewModel(recipesNavigation);
         ItemRecipeBinding binding = ItemRecipeBinding.bind(itemView);
         binding.setViewModel(viewModel);
         return new RecipeViewHolder(itemView, binding, viewModel);
