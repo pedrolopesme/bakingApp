@@ -39,15 +39,15 @@ public class RecipesActivityTest {
                 .check(matches((isDisplayed())));
 
         onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_name))
+                .atPositionOnView(1, R.id.tv_recipe_item_name))
                 .check(matches(isDisplayed()));
 
         onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_servings))
+                .atPositionOnView(1, R.id.tv_recipe_item_servings))
                 .check(matches(isDisplayed()));
 
         onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_level))
+                .atPositionOnView(1, R.id.tv_recipe_item_level))
                 .check(matches(isDisplayed()));
     }
 
