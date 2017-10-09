@@ -15,6 +15,7 @@ import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,7 +52,7 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
         return new RecipeViewHolder(itemView, binding, viewModel);
     }
 
-    public void setItems(final ArrayList<Recipe> newItems) {
+    public void setItems(final List<Recipe> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();

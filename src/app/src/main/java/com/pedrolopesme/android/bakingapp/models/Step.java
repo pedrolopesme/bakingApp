@@ -3,15 +3,26 @@ package com.pedrolopesme.android.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Cooking step model class
  */
 public final class Step implements Parcelable {
 
+    @Expose
     private int id;
+
+    @Expose
     private String shortDescription;
+
+    @Expose
     private String description;
+
+    @Expose
     private String videoURL;
+
+    @Expose
     private String thumbnailURL;
 
     public int getId() {
@@ -64,7 +75,6 @@ public final class Step implements Parcelable {
                 ", thumbnailURL='" + thumbnailURL + '\'' +
                 '}';
     }
-
 
     @Override
     public int describeContents() {

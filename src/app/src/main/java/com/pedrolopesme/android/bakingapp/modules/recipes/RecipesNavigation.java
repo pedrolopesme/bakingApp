@@ -2,6 +2,7 @@ package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 import com.pedrolopesme.android.bakingapp.R;
@@ -12,7 +13,7 @@ import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity;
 /**
  * Controls navigation between Recipes Master Navigation Fragments/Activities
  */
-public class RecipesNavigation  {
+public class RecipesNavigation {
 
     public static final String TAG_RECIPES_FRAGMENT = "recipesFragment";
     public static final String TAG_RECIPE_FRAGMENT = "recipeFragment";
@@ -49,7 +50,9 @@ public class RecipesNavigation  {
      * @param recipe item
      */
     private void navigateToActivity(Recipe recipe) {
-        context.startActivity(new Intent(context, RecipeActivity.class));
+        Intent recipeActivityIntent = new Intent(context, RecipeActivity.class);
+        recipeActivityIntent.putExtra(RecipeActivity.RECIPE_BUNDLE_KEY, recipe);
+        context.startActivity(recipeActivityIntent);
     }
 
     /**
@@ -58,7 +61,12 @@ public class RecipesNavigation  {
      * @param recipe item
      */
     private void navigateToFragment(Recipe recipe) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(RecipeFragment.RECIPE_BUNDLE_KEY, recipe);
+
         RecipeFragment recipeFragment = new RecipeFragment();
+        recipeFragment.setArguments(bundle);
+
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.fl_recipe_container, recipeFragment, TAG_RECIPE_FRAGMENT)

@@ -3,6 +3,8 @@ package com.pedrolopesme.android.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +13,22 @@ import java.util.List;
  */
 public final class Recipe implements Parcelable {
 
+    @Expose
     private int id;
+
+    @Expose
     private String name;
+
+    @Expose
     private int servings;
+
+    @Expose
     private String image;
+
+    @Expose
     private List<Ingredient> ingredients;
+
+    @Expose
     private List<Step> steps;
 
     public int getId() {
@@ -90,7 +103,7 @@ public final class Recipe implements Parcelable {
         dest.writeInt(this.servings);
         dest.writeString(this.image);
         dest.writeTypedList(this.ingredients);
-        dest.writeList(this.steps);
+        dest.writeTypedList(this.steps);
     }
 
     public Recipe() {
@@ -102,8 +115,7 @@ public final class Recipe implements Parcelable {
         this.servings = in.readInt();
         this.image = in.readString();
         this.ingredients = in.createTypedArrayList(Ingredient.CREATOR);
-        this.steps = new ArrayList<Step>();
-        in.readList(this.steps, Step.class.getClassLoader());
+        this.steps = in.createTypedArrayList(Step.CREATOR);
     }
 
     public static final Parcelable.Creator<Recipe> CREATOR = new Parcelable.Creator<Recipe>() {

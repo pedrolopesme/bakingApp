@@ -3,20 +3,27 @@ package com.pedrolopesme.android.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * Ingredient model class
  */
 public final class Ingredient implements Parcelable {
 
-    private int quantity;
+    @Expose
+    private double quantity;
+
+    @Expose
     private String measure;
+
+    @Expose
     private String ingredient;
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -45,7 +52,6 @@ public final class Ingredient implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -53,7 +59,7 @@ public final class Ingredient implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.quantity);
+        dest.writeDouble(this.quantity);
         dest.writeString(this.measure);
         dest.writeString(this.ingredient);
     }
@@ -62,7 +68,7 @@ public final class Ingredient implements Parcelable {
     }
 
     protected Ingredient(Parcel in) {
-        this.quantity = in.readInt();
+        this.quantity = in.readDouble();
         this.measure = in.readString();
         this.ingredient = in.readString();
     }

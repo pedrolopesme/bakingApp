@@ -1,20 +1,28 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.pedrolopesme.android.bakingapp.R;
+import com.pedrolopesme.android.bakingapp.integration.APIServiceFactory;
+import com.pedrolopesme.android.bakingapp.integration.api.RecipesAPIService;
+import com.pedrolopesme.android.bakingapp.integration.api.RetrofitAPIServiceFactory;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 import com.pedrolopesme.android.bakingapp.modules.adapter.RecipeListAdapter;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.RecyclerViewViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Recipe Recycler View ViewModel
@@ -25,19 +33,20 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
     private final Context appContext;
     private final RecipeListAdapter adapter;
 
-    public RecipesViewModel(final RecipesNavigation recipesNavigation, final Context context, final @Nullable State savedInstanceState) {
+    public RecipesViewModel(final RecipesNavigation recipesNavigation,
+                            final Context context,
+                            final @Nullable State savedInstanceState) {
         super(savedInstanceState);
         Log.d(TAG_LOG, "Creating RecipesViewModel");
         appContext = context.getApplicationContext();
 
-        ArrayList<Recipe> recipes;
-        if (savedInstanceState instanceof RecipeState) {
-            recipes = ((RecipeState) savedInstanceState).recipes;
-        } else {
-            recipes = getRecipes();
-        }
         adapter = new RecipeListAdapter(recipesNavigation);
-        adapter.setItems(recipes);
+        if (savedInstanceState instanceof RecipeState) {
+            adapter.setItems(((RecipeState) savedInstanceState).recipes);
+        } else {
+            collectRecipes();
+        }
+
         Log.d(TAG_LOG, "RecipesViewModel created");
     }
 
@@ -56,37 +65,28 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
         return new RecipeState(this);
     }
 
-    /**
-     * TODO replace this with the real data source
-     *
-     * @return recipes list
-     */
-    private ArrayList<Recipe> getRecipes() {
-        ArrayList<Recipe> recipes = new ArrayList<>();
+    private void collectRecipes() {
 
-        Recipe recipe = new Recipe();
-        recipe.setId(1);
-        recipe.setName("Teste");
-        recipe.setServings(3);
+        Log.i(TAG_LOG, "Getting recipes from api");
+        APIServiceFactory factory = new RetrofitAPIServiceFactory(appContext.getString(R.string.base_api_endpoint));
+        RecipesAPIService recipesAPIService = factory.getRecipesAPIService();
+        recipesAPIService.getAll().enqueue(new Callback<List<Recipe>>() {
 
-        List<Step> steps = new ArrayList<>();
-        steps.add(new Step());
-        recipe.setSteps(steps);
-        recipes.add(recipe);
+            @Override
+            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG_LOG, "Recipes collected with success");
+                    adapter.setItems(response.body());
+                }
+            }
 
-        Recipe recipe2 = new Recipe();
-        recipe2.setId(2);
-        recipe2.setName("Teste 2");
-        recipe2.setServings(6);
-        recipes.add(recipe2);
+            @Override
+            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                Log.e(TAG_LOG, "It was impossible to collect recipes from the API", t);
+            }
 
-        Recipe recipe3 = new Recipe();
-        recipe3.setId(3);
-        recipe3.setName("Teste 3");
-        recipe3.setServings(1);
-        recipes.add(recipe3);
+        });
 
-        return recipes;
     }
 
     private static class RecipeState extends RecyclerViewViewModelState {
