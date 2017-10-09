@@ -6,20 +6,29 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
+import com.pedrolopesme.android.bakingapp.integration.APIServiceFactory;
+import com.pedrolopesme.android.bakingapp.integration.api.RecipesAPIService;
+import com.pedrolopesme.android.bakingapp.integration.api.RetrofitAPIServiceFactory;
+import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.fragments.RecipeFragment;
 import com.pedrolopesme.android.bakingapp.modules.fragments.RecipesFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.activity.BaseActivity;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Recipes Activity - Main Activity
  */
 public final class RecipesActivity extends BaseActivity {
 
-    private final String TAG_LOG = this.getClass().getSimpleName();
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        Log.d(TAG_LOG, "Creating RecipesActivity");
+        Log.d(getTagName(), "Creating RecipesActivity");
+
         super.onCreate(savedInstanceState);
         renderActionBar(getString(R.string.activity_recipes));
         setContentView(R.layout.activity_recipes);
@@ -38,12 +47,12 @@ public final class RecipesActivity extends BaseActivity {
      * @param fragmentManager reference
      */
     private void createOnePaneLayout(FragmentManager fragmentManager) {
-        Log.d(TAG_LOG, "Creating layout with one pane");
+        Log.d(getTagName(), "Creating layout with one pane");
 
         int columns = 1;
         Fragment fragment = fragmentManager.findFragmentByTag(RecipesNavigation.TAG_RECIPES_FRAGMENT);
         if (fragment == null) {
-            Log.d(TAG_LOG, "Creating RecipesFragment");
+            Log.d(getTagName(), "Creating RecipesFragment");
 
             fragment = new RecipesFragment();
             Bundle arguments = new Bundle();
@@ -54,7 +63,7 @@ public final class RecipesActivity extends BaseActivity {
                     .add(R.id.fl_recipes_container, fragment, RecipesNavigation.TAG_RECIPES_FRAGMENT)
                     .commit();
 
-            Log.d(TAG_LOG, "Fragment Created");
+            Log.d(getTagName(), "Fragment Created");
 
         } else {
             Bundle arguments = fragment.getArguments();
@@ -68,7 +77,7 @@ public final class RecipesActivity extends BaseActivity {
      * @param fragmentManager reference
      */
     private void createTwoPanesLayout(FragmentManager fragmentManager) {
-        Log.d(TAG_LOG, "Creating layout with two panes");
+        Log.d(getTagName(), "Creating layout with two panes");
 
         int columns = 2;
         Fragment recipesFragment = fragmentManager.findFragmentByTag(RecipesNavigation.TAG_RECIPES_FRAGMENT);
@@ -76,7 +85,7 @@ public final class RecipesActivity extends BaseActivity {
 
         if (recipesFragment == null && recipeFragment == null) {
 
-            Log.d(TAG_LOG, "Creating fragments");
+            Log.d(getTagName(), "Creating fragments");
             recipeFragment = new RecipeFragment();
             recipesFragment = new RecipesFragment();
 
@@ -89,10 +98,9 @@ public final class RecipesActivity extends BaseActivity {
                     .add(R.id.fl_recipe_container, recipeFragment, RecipesNavigation.TAG_RECIPE_FRAGMENT)
                     .commit();
 
-            Log.d(TAG_LOG, "Fragment Created");
+            Log.d(getTagName(), "Fragment Created");
 
         } else {
-
             Bundle arguments = recipesFragment.getArguments();
             arguments.putInt(RecipesFragment.COLUMNS_BUNDLE_NAME, columns);
         }

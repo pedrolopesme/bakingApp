@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    protected String getTagName() {
+        return this.getClass().getSimpleName();
+    }
+
     protected void renderActionBar(String title) {
         setTitle(title);
     }

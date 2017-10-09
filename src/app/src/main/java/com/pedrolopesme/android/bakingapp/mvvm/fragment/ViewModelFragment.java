@@ -15,6 +15,10 @@ public abstract class ViewModelFragment extends Fragment {
 
     private ViewModel viewModel;
 
+    protected String getTagName() {
+        return this.getClass().getSimpleName();
+    }
+
     @Nullable
     protected abstract ViewModel createViewModel(@Nullable ViewModel.State savedViewModelState);
 
