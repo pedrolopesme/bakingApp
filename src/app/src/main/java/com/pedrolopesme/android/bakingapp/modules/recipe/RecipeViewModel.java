@@ -4,17 +4,11 @@ import android.content.Context;
 import android.databinding.Bindable;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.modules.adapter.RecipeListAdapter;
-import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
-import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.RecyclerViewViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
-
-import java.util.ArrayList;
 
 /**
  * Recipe ViewModel
@@ -33,7 +27,6 @@ public final class RecipeViewModel extends ViewModel {
         if (savedInstanceState instanceof RecipeState) {
             recipe = ((RecipeState) savedInstanceState).recipe;
         }
-
         Log.d(TAG_LOG, "Recipe ViewModel created");
     }
 
@@ -46,8 +39,11 @@ public final class RecipeViewModel extends ViewModel {
     }
 
     @Bindable
-    public String getName() {
-        return recipe.getName();
+    public String getIngredients() {
+        if (recipe != null)
+            return new IngredientsFormatter(recipe.getIngredients()).simpleListFormat();
+        else
+            return "";
     }
 
     @Override
