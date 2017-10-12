@@ -51,7 +51,7 @@ public final class RecipeViewModel extends ViewModel {
         return new RecipeState(this);
     }
 
-    private static class RecipeState extends State {
+    public static class RecipeState extends State {
 
         private final Recipe recipe;
 

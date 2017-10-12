@@ -1,16 +1,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="recipeViewModel"
+            name="viewModel"
             type="com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel" />
-
-        <variable
-            name="stepsViewModel"
-            type="com.pedrolopesme.android.bakingapp.modules.step.StepsViewModel" />
     </data>
 
     <LinearLayout
@@ -20,18 +14,10 @@
         tools:context="com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity">
 
         <TextView
-            android:id="@+id/tv_recipe_ingredients"
+            android:id="@+id/tv_step_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{recipeViewModel.ingredients}" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_steps"
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            android:layout_weight="1"
-            bind:recyclerViewViewModel="@{stepsViewModel}" />
+            android:text="@{viewModel.ingredients}" />
 
     </LinearLayout>
 </layout>

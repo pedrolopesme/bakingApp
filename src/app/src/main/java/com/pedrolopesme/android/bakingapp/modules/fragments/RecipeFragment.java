@@ -11,8 +11,13 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipeBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel;
-import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
+import com.pedrolopesme.android.bakingapp.modules.step.StepsNavigation;
+import com.pedrolopesme.android.bakingapp.modules.step.StepsViewModel;
+import com.pedrolopesme.android.bakingapp.mvvm.fragment.MultipleViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -21,10 +26,11 @@ import butterknife.ButterKnife;
  * <p>
  * This fragment shows recipe info
  */
-public final class RecipeFragment extends ViewModelFragment {
+public final class RecipeFragment extends MultipleViewModelFragment {
 
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
     private RecipeViewModel recipeViewModel;
+    private StepsViewModel stepsViewModel;
     private Recipe recipe;
 
     @Override
@@ -38,15 +44,18 @@ public final class RecipeFragment extends ViewModelFragment {
             return createViewRecipeFound(inflater, container, savedInstanceState);
 
     }
-    
+
     private View createViewRecipeFound(final LayoutInflater inflater, final ViewGroup container,
                                        final Bundle savedInstanceState) {
         Log.d(getTagName(), "Recipe found: " + recipe);
         recipeViewModel.setRecipe(recipe);
         View root = inflater.inflate(R.layout.fragment_recipe, container, false);
-        ButterKnife.bind(this, root);
+
         FragmentRecipeBinding binding = FragmentRecipeBinding.bind(root);
-        binding.setViewModel(recipeViewModel);
+        binding.setRecipeViewModel(recipeViewModel);
+        binding.setStepsViewModel(stepsViewModel);
+
+        ButterKnife.bind(this, root);
         return root;
     }
 
@@ -57,12 +66,22 @@ public final class RecipeFragment extends ViewModelFragment {
         return root;
     }
 
+
     @Nullable
     @Override
-    protected ViewModel createViewModel(final @Nullable ViewModel.State savedViewModelState) {
+    protected List<ViewModel> createViewModel(final @Nullable List<ViewModel.State> savedViewModelState) {
         Log.d(getTagName(), "Creating view model");
-        recipeViewModel = new RecipeViewModel(getContext(), savedViewModelState);
-        return recipeViewModel;
+
+        ViewModel.State recipeViewlModelState = getState(RecipeViewModel.RecipeState.class, savedViewModelState);
+        recipeViewModel = new RecipeViewModel(getContext(), recipeViewlModelState);
+
+        ViewModel.State stepsViewlModelState = getState(StepsViewModel.StepState.class, savedViewModelState);
+        stepsViewModel = new StepsViewModel(new StepsNavigation(), getContext(), stepsViewlModelState);
+
+        List<ViewModel> viewModels = new ArrayList<>();
+        viewModels.add(recipeViewModel);
+        viewModels.add(stepsViewModel);
+        return viewModels;
     }
 
     public void setRecipe(Recipe recipe) {
