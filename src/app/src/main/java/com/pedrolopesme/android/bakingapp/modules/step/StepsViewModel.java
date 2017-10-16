@@ -46,8 +46,6 @@ public final class StepsViewModel extends RecyclerViewViewModel {
         adapter = new StepListAdapter(stepsNavigation);
         if (savedInstanceState instanceof StepState) {
             adapter.setItems(((StepState) savedInstanceState).steps);
-        } else {
-            collectRecipes();
         }
 
         Log.d(TAG_LOG, "StepsViewModel created");
@@ -68,21 +66,7 @@ public final class StepsViewModel extends RecyclerViewViewModel {
         return new StepState(this);
     }
 
-    private void collectRecipes() {
-        Log.i(TAG_LOG, "Getting steps");
-
-        List<Step> steps = new ArrayList<>();
-        Step step1 = new Step();
-        step1.setDescription("aaa");
-        steps.add(step1);
-
-        Step step2 = new Step();
-        step2.setDescription("bbb");
-        steps.add(step2);
-        Step step3 = new Step();
-        step3.setDescription("ccc");
-        steps.add(step3);
-
+    public void setSteps(List<Step> steps) {
         adapter.setItems(steps);
     }
 

@@ -49,8 +49,9 @@ public final class RecipeFragment extends MultipleViewModelFragment {
                                        final Bundle savedInstanceState) {
         Log.d(getTagName(), "Recipe found: " + recipe);
         recipeViewModel.setRecipe(recipe);
-        View root = inflater.inflate(R.layout.fragment_recipe, container, false);
+        stepsViewModel.setSteps(recipe.getSteps());
 
+        View root = inflater.inflate(R.layout.fragment_recipe, container, false);
         FragmentRecipeBinding binding = FragmentRecipeBinding.bind(root);
         binding.setRecipeViewModel(recipeViewModel);
         binding.setStepsViewModel(stepsViewModel);
