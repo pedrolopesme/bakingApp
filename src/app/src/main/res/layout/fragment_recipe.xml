@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="recipeViewModel"
             type="com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel" />
@@ -24,7 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{recipeViewModel.ingredients}" />
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_steps"

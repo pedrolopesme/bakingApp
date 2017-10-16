@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
  */
 public final class RecipeFragment extends MultipleViewModelFragment {
 
+    public static final String TAG_RECIPE_FRAGMENT = "recipeFragment";
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
     public static final String COLUMNS_BUNDLE_NAME = "recipeFragmentColumns";
     private RecipeViewModel recipeViewModel;

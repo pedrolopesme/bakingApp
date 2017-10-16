@@ -45,7 +45,6 @@ public class StepActivity extends BaseActivity {
             Bundle bundle = new Bundle();
             bundle.putParcelable(StepFragment.RECIPE_BUNDLE_KEY, recipe);
             bundle.putParcelable(StepFragment.STEP_BUNDLE_KEY, step);
-//            bundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, 1);
             stepFragment = new StepFragment();
             stepFragment.setArguments(bundle);
 
@@ -60,7 +59,6 @@ public class StepActivity extends BaseActivity {
             Bundle bundle = stepFragment.getArguments();
             bundle.putParcelable(StepFragment.RECIPE_BUNDLE_KEY, recipe);
             bundle.putParcelable(StepFragment.STEP_BUNDLE_KEY, step);
-//            arguments.putInt(RecipeFragment.COLUMNS_BUNDLE_NAME, 1);
         }
     }
 

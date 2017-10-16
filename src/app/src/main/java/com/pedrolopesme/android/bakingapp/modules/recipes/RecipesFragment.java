@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipesBinding;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
@@ -23,7 +21,7 @@ import butterknife.ButterKnife;
  */
 public final class RecipesFragment extends ViewModelFragment {
 
-    public static final String COLUMNS_BUNDLE_NAME = "recipesFragmentColumns";
+    public static final String TAG_RECIPES_FRAGMENT = "recipesFragment";
     private RecipesViewModel recipesRecyclerView;
 
     @Override
@@ -40,27 +38,7 @@ public final class RecipesFragment extends ViewModelFragment {
     @Nullable
     @Override
     protected ViewModel createViewModel(final @Nullable ViewModel.State savedViewModelState) {
-        recipesRecyclerView = new RecipesViewModel(createRecipesNavigation(), getContext(), savedViewModelState);
+        recipesRecyclerView = new RecipesViewModel(getContext(), savedViewModelState);
         return recipesRecyclerView;
     }
-
-    /**
-     * Creates recipes navigation
-     *
-     * @return recipes navigation
-     */
-    private RecipesNavigation createRecipesNavigation() {
-        Bundle bundle = getArguments();
-        int panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
-
-        switch (panels) {
-            case 1:
-                return new RecipesNavigation(RecipesNavigation.Panels.ONE, getContext(), getFragmentManager());
-            case 2:
-                return new RecipesNavigation(RecipesNavigation.Panels.TWO, getContext(), getFragmentManager());
-            default:
-                return new RecipesNavigation(RecipesNavigation.Panels.ONE, getContext(), getFragmentManager());
-        }
-    }
-
 }

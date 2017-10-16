@@ -1,9 +1,9 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,15 +32,15 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
     private final String TAG_LOG = this.getClass().getSimpleName();
     private final Context appContext;
     private final RecipeListAdapter adapter;
+    private final static int RECYCLER_VIEW_LAYOUT_COLUMNS = 3;
 
-    public RecipesViewModel(final RecipesNavigation recipesNavigation,
-                            final Context context,
+    public RecipesViewModel(final Context context,
                             final @Nullable State savedInstanceState) {
         super(savedInstanceState);
         Log.d(TAG_LOG, "Creating RecipesViewModel");
         appContext = context.getApplicationContext();
 
-        adapter = new RecipeListAdapter(recipesNavigation);
+        adapter = new RecipeListAdapter(appContext);
         if (savedInstanceState instanceof RecipeState) {
             adapter.setItems(((RecipeState) savedInstanceState).recipes);
         } else {
@@ -57,7 +57,10 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
 
     @Override
     protected RecyclerView.LayoutManager createLayoutManager() {
-        return new LinearLayoutManager(appContext);
+        if (appContext.getResources().getBoolean(R.bool.is_table))
+            return new GridLayoutManager(appContext, RECYCLER_VIEW_LAYOUT_COLUMNS);
+        else
+            return new LinearLayoutManager(appContext);
     }
 
     @Override

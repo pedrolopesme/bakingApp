@@ -23,8 +23,10 @@ import butterknife.ButterKnife;
  */
 public final class StepFragment extends ViewModelFragment {
 
+    public static final String TAG_STEP_FRAGMENT = "stepFragment";
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
     public static final String STEP_BUNDLE_KEY = "STEP_BUNDLE_KEY";
+    public static final String COLUMNS_BUNDLE_NAME = "stepFragmentColumns";
 
     private StepViewModel stepViewModel;
     private Recipe recipe;
