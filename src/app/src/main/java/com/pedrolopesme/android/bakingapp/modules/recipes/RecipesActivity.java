@@ -6,19 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
-import com.pedrolopesme.android.bakingapp.integration.APIServiceFactory;
-import com.pedrolopesme.android.bakingapp.integration.api.RecipesAPIService;
-import com.pedrolopesme.android.bakingapp.integration.api.RetrofitAPIServiceFactory;
-import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.modules.fragments.RecipeFragment;
-import com.pedrolopesme.android.bakingapp.modules.fragments.RecipesFragment;
+import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.activity.BaseActivity;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Recipes Activity - Main Activity

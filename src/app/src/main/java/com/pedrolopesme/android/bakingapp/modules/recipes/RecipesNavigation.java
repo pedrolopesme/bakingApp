@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.modules.fragments.RecipeFragment;
+import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeFragment;
 import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity;
 
 /**

@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.modules.fragments;
+package com.pedrolopesme.android.bakingapp.modules.recipe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -73,7 +73,7 @@ public final class RecipeFragment extends MultipleViewModelFragment {
     protected List<ViewModel> createViewModel(final @Nullable List<ViewModel.State> savedViewModelState) {
         Log.d(getTagName(), "Creating view model");
         recipe = extractRecipeFromArguments();
-        
+
         ViewModel.State recipeViewlModelState = getState(RecipeViewModel.RecipeState.class, savedViewModelState);
         recipeViewModel = new RecipeViewModel(getContext(), recipeViewlModelState);
 

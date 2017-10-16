@@ -9,8 +9,6 @@ import android.util.Log;
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
-import com.pedrolopesme.android.bakingapp.modules.fragments.RecipeFragment;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
 import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.activity.BaseActivity;
 

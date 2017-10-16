@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.modules.fragments;
+package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
