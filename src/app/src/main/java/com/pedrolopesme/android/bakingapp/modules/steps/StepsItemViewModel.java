@@ -39,7 +39,7 @@ public final class StepsItemViewModel extends ItemViewModel<Step> {
 
     @Bindable
     public String getDescription() {
-        return step.getDescription();
+        return step.getShortDescription();
     }
 
 }

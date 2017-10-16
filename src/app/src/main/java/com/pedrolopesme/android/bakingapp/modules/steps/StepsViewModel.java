@@ -59,6 +59,10 @@ public final class StepsViewModel extends RecyclerViewViewModel {
         adapter.setItems(steps);
     }
 
+    public void setNavigation(List<Step> steps) {
+        adapter.setItems(steps);
+    }
+
     public static class StepState extends RecyclerViewViewModelState {
 
         private final ArrayList<Step> steps;

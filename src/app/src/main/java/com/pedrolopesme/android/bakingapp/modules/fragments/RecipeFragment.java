@@ -38,7 +38,6 @@ public final class RecipeFragment extends MultipleViewModelFragment {
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
 
-        recipe = extractRecipeFromArguments();
         if (recipe == null)
             return createViewRecipeNotFound(inflater, container, savedInstanceState);
         else
@@ -73,7 +72,8 @@ public final class RecipeFragment extends MultipleViewModelFragment {
     @Override
     protected List<ViewModel> createViewModel(final @Nullable List<ViewModel.State> savedViewModelState) {
         Log.d(getTagName(), "Creating view model");
-
+        recipe = extractRecipeFromArguments();
+        
         ViewModel.State recipeViewlModelState = getState(RecipeViewModel.RecipeState.class, savedViewModelState);
         recipeViewModel = new RecipeViewModel(getContext(), recipeViewlModelState);
 
@@ -110,11 +110,11 @@ public final class RecipeFragment extends MultipleViewModelFragment {
 
         switch (panels) {
             case 1:
-                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager());
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager(), recipe);
             case 2:
-                return new StepsNavigation(StepsNavigation.Panels.TWO, getContext(), getFragmentManager());
+                return new StepsNavigation(StepsNavigation.Panels.TWO, getContext(), getFragmentManager(), recipe);
             default:
-                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager());
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager(), recipe);
         }
     }
 

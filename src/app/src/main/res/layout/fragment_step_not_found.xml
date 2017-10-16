@@ -1,13 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.pedrolopesme.android.bakingapp.modules.step.StepViewModel" />
-    </data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,10 +8,9 @@
         tools:context="com.pedrolopesme.android.bakingapp.modules.step.StepActivity">
 
         <TextView
-            android:id="@+id/tv_step_description"
+            android:id="@+id/tv_step_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.instruction}" />
-
+            android:text="@string/step_not_found" />
     </LinearLayout>
 </layout>
