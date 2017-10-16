@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.modules.step;
+package com.pedrolopesme.android.bakingapp.modules.steps;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -7,24 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.pedrolopesme.android.bakingapp.R;
-import com.pedrolopesme.android.bakingapp.integration.APIServiceFactory;
-import com.pedrolopesme.android.bakingapp.integration.api.RecipesAPIService;
-import com.pedrolopesme.android.bakingapp.integration.api.RetrofitAPIServiceFactory;
-import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
-import com.pedrolopesme.android.bakingapp.modules.adapter.RecipeListAdapter;
 import com.pedrolopesme.android.bakingapp.modules.adapter.StepListAdapter;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.RecyclerViewViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Steps Recycler View ViewModel

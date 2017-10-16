@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.pedrolopesme.android.bakingapp.modules.step.StepItemViewModel" />
+            type="com.pedrolopesme.android.bakingapp.modules.steps.StepsItemViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

@@ -31,15 +31,6 @@ public class RecipeActivity extends BaseActivity {
         createLayout(recipe);
     }
 
-    private Recipe extractRecipeFromIntent() {
-        Intent intent = getIntent();
-        if (null != intent) {
-            return (Recipe) intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
-
-        }
-        return null;
-    }
-
     private void createLayout(Recipe recipe) {
         Log.d(getTagName(), "Creating layout with Recipe fragment for recipe " + recipe);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -50,6 +41,7 @@ public class RecipeActivity extends BaseActivity {
 
             Bundle bundle = new Bundle();
             bundle.putParcelable(RecipeFragment.RECIPE_BUNDLE_KEY, recipe);
+            bundle.putInt(RecipeFragment.COLUMNS_BUNDLE_NAME, 1);
             recipeFragment = new RecipeFragment();
             recipeFragment.setArguments(bundle);
 
@@ -63,6 +55,17 @@ public class RecipeActivity extends BaseActivity {
             Log.d(getTagName(), "Reusing Fragment with recipe: " + recipe);
             Bundle arguments = recipeFragment.getArguments();
             arguments.putParcelable(RecipeFragment.RECIPE_BUNDLE_KEY, recipe);
+            arguments.putInt(RecipeFragment.COLUMNS_BUNDLE_NAME, 1);
         }
     }
+
+    private Recipe extractRecipeFromIntent() {
+        Intent intent = getIntent();
+        if (null != intent) {
+            return (Recipe) intent.getParcelableExtra(RECIPE_BUNDLE_KEY);
+
+        }
+        return null;
+    }
+
 }

@@ -11,8 +11,8 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipeBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel;
-import com.pedrolopesme.android.bakingapp.modules.step.StepsNavigation;
-import com.pedrolopesme.android.bakingapp.modules.step.StepsViewModel;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.MultipleViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 public final class RecipeFragment extends MultipleViewModelFragment {
 
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
+    public static final String COLUMNS_BUNDLE_NAME = "recipeFragmentColumns";
     private RecipeViewModel recipeViewModel;
     private StepsViewModel stepsViewModel;
     private Recipe recipe;
@@ -77,7 +78,7 @@ public final class RecipeFragment extends MultipleViewModelFragment {
         recipeViewModel = new RecipeViewModel(getContext(), recipeViewlModelState);
 
         ViewModel.State stepsViewlModelState = getState(StepsViewModel.StepState.class, savedViewModelState);
-        stepsViewModel = new StepsViewModel(new StepsNavigation(), getContext(), stepsViewlModelState);
+        stepsViewModel = new StepsViewModel(createStepsNavigation(), getContext(), stepsViewlModelState);
 
         List<ViewModel> viewModels = new ArrayList<>();
         viewModels.add(recipeViewModel);
@@ -95,6 +96,26 @@ public final class RecipeFragment extends MultipleViewModelFragment {
             return (Recipe) arguments.getParcelable(RECIPE_BUNDLE_KEY);
         }
         return null;
+    }
+
+
+    /**
+     * Creates steps navigation
+     *
+     * @return steps navigation
+     */
+    private StepsNavigation createStepsNavigation() {
+        Bundle bundle = getArguments();
+        int panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
+
+        switch (panels) {
+            case 1:
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager());
+            case 2:
+                return new StepsNavigation(StepsNavigation.Panels.TWO, getContext(), getFragmentManager());
+            default:
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager());
+        }
     }
 
 }

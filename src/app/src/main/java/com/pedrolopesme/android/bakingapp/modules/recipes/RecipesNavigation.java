@@ -63,6 +63,7 @@ public class RecipesNavigation {
     private void navigateToFragment(Recipe recipe) {
         Bundle bundle = new Bundle();
         bundle.putParcelable(RecipeFragment.RECIPE_BUNDLE_KEY, recipe);
+        bundle.putInt(RecipeFragment.COLUMNS_BUNDLE_NAME, mPanels.equals(Panels.ONE) ? 1 : 2);
 
         RecipeFragment recipeFragment = new RecipeFragment();
         recipeFragment.setArguments(bundle);

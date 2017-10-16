@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  */
 public final class RecipesFragment extends ViewModelFragment {
 
-    public static final String COLUMNS_BUNDLE_NAME = "recipesFragmentName";
+    public static final String COLUMNS_BUNDLE_NAME = "recipesFragmentColumns";
     private RecipesViewModel recipesRecyclerView;
 
     @Override

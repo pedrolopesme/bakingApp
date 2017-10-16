@@ -7,14 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
-import com.pedrolopesme.android.bakingapp.databinding.ItemRecipeBinding;
 import com.pedrolopesme.android.bakingapp.databinding.ItemStepBinding;
-import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel;
-import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesNavigation;
-import com.pedrolopesme.android.bakingapp.modules.step.StepItemViewModel;
-import com.pedrolopesme.android.bakingapp.modules.step.StepsNavigation;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsItemViewModel;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -26,7 +22,7 @@ import butterknife.OnClick;
 /**
  * Step List Adapter implementing RecyclerViewAdapter
  */
-public final class StepListAdapter extends RecyclerViewAdapter<Step, StepItemViewModel> {
+public final class StepListAdapter extends RecyclerViewAdapter<Step, StepsItemViewModel> {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
 
@@ -49,7 +45,7 @@ public final class StepListAdapter extends RecyclerViewAdapter<Step, StepItemVie
                 .from(parent.getContext())
                 .inflate(R.layout.item_step, parent, false);
 
-        StepItemViewModel viewModel = new StepItemViewModel(stepsNavigation);
+        StepsItemViewModel viewModel = new StepsItemViewModel(stepsNavigation);
         ItemStepBinding binding = ItemStepBinding.bind(itemView);
         binding.setViewModel(viewModel);
 
@@ -67,12 +63,12 @@ public final class StepListAdapter extends RecyclerViewAdapter<Step, StepItemVie
     }
 
     class StepViewHolder
-            extends ItemViewHolder<Step, StepItemViewModel> {
+            extends ItemViewHolder<Step, StepsItemViewModel> {
 
         private final String TAG_LOG = this.getClass().getSimpleName();
 
         StepViewHolder(final View itemView, final ViewDataBinding binding,
-                       final StepItemViewModel viewModel) {
+                       final StepsItemViewModel viewModel) {
 
             super(itemView, binding, viewModel);
             ButterKnife.bind(this, itemView);

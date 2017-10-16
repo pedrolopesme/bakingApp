@@ -10,7 +10,7 @@
 
         <variable
             name="stepsViewModel"
-            type="com.pedrolopesme.android.bakingapp.modules.step.StepsViewModel" />
+            type="com.pedrolopesme.android.bakingapp.modules.steps.StepsViewModel" />
     </data>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.modules.step;
+package com.pedrolopesme.android.bakingapp.modules.steps;
 
 import android.content.Context;
 import android.databinding.Bindable;
@@ -10,31 +10,31 @@ import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ItemViewModel;
 /**
  * Recipe Step Item ViewModel
  */
-public final class StepItemViewModel extends ItemViewModel<Step> {
+public final class StepsItemViewModel extends ItemViewModel<Step> {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
     private Step step;
     private StepsNavigation stepNavigation;
     private Context context;
 
-    public StepItemViewModel(StepsNavigation stepNavigation) {
+    public StepsItemViewModel(StepsNavigation stepNavigation) {
         this.stepNavigation = stepNavigation;
         this.context = stepNavigation.getContext();
     }
 
     @Override
     public void setItem(final Step item) {
-        Log.d(TAG_LOG, "Setting Recipe to RecipeItemViewModel: " + item);
+        Log.d(TAG_LOG, "Setting Step to StepsItemViewModel: " + item);
         step = item;
         notifyChange();
     }
 
     /**
-     * Opens a Recipe Activity from the current step item
+     * Opens a Step description from the current step item
      */
     public void onClick() {
         Log.d(TAG_LOG, "Firing onClick on step:" + step);
-//        stepNavigation.navigate(step);
+        stepNavigation.navigate(step);
     }
 
     @Bindable
