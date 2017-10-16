@@ -75,12 +75,16 @@ public final class RecipesActivity extends BaseActivity {
         if (recipesFragment == null && recipeFragment == null) {
 
             Log.d(getTagName(), "Creating fragments");
+            Bundle recipeBundle = new Bundle();
+            recipeBundle.putInt(RecipeFragment.COLUMNS_BUNDLE_NAME, columns);
             recipeFragment = new RecipeFragment();
-            recipesFragment = new RecipesFragment();
+            recipeFragment.setArguments(recipeBundle);
 
-            Bundle arguments = new Bundle();
-            arguments.putInt(RecipesFragment.COLUMNS_BUNDLE_NAME, columns);
-            recipesFragment.setArguments(arguments);
+
+            recipesFragment = new RecipesFragment();
+            Bundle recipesBundle = new Bundle();
+            recipesBundle.putInt(RecipesFragment.COLUMNS_BUNDLE_NAME, columns);
+            recipesFragment.setArguments(recipesBundle);
 
             fragmentManager.beginTransaction()
                     .add(R.id.fl_recipes_container, recipesFragment, RecipesNavigation.TAG_RECIPES_FRAGMENT)

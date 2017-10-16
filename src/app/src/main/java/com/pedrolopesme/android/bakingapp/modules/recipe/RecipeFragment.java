@@ -106,7 +106,7 @@ public final class RecipeFragment extends MultipleViewModelFragment {
      */
     private StepsNavigation createStepsNavigation() {
         Bundle bundle = getArguments();
-        int panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
+        Integer panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
 
         switch (panels) {
             case 1:
