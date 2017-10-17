@@ -1,5 +1,6 @@
 package com.pedrolopesme.android.bakingapp.modules.step;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -7,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.devbrackets.android.exomedia.listener.OnPreparedListener;
+import com.devbrackets.android.exomedia.ui.widget.VideoView;
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentStepBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
@@ -14,6 +17,7 @@ import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -21,7 +25,7 @@ import butterknife.ButterKnife;
  * <p>
  * This fragment shows step info
  */
-public final class StepFragment extends ViewModelFragment {
+public final class StepFragment extends ViewModelFragment implements OnPreparedListener {
 
     public static final String TAG_STEP_FRAGMENT = "stepFragment";
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
@@ -31,6 +35,7 @@ public final class StepFragment extends ViewModelFragment {
     private StepViewModel stepViewModel;
     private Recipe recipe;
     private Step step;
+    private VideoView videoView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -66,6 +71,14 @@ public final class StepFragment extends ViewModelFragment {
         return root;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        videoView = (VideoView) getView().findViewById(R.id.vv_step_video);
+        videoView.setOnPreparedListener(this);
+        videoView.setVideoURI(stepViewModel.getVideoUri());
+    }
+
     @Nullable
     @Override
     protected ViewModel createViewModel(final @Nullable ViewModel.State savedViewModelState) {
@@ -98,4 +111,7 @@ public final class StepFragment extends ViewModelFragment {
         return null;
     }
 
+    @Override
+    public void onPrepared() {
+    }
 }

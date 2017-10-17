@@ -2,11 +2,11 @@ package com.pedrolopesme.android.bakingapp.modules.step;
 
 import android.content.Context;
 import android.databinding.Bindable;
+import android.net.Uri;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
@@ -50,7 +50,6 @@ public final class StepViewModel extends ViewModel {
         this.step = step;
     }
 
-
     @Bindable
     public String getInstruction() {
         return step.getDescription();
@@ -59,6 +58,10 @@ public final class StepViewModel extends ViewModel {
     @Override
     public StepState getInstanceState() {
         return new StepState(this);
+    }
+
+    public Uri getVideoUri() {
+        return Uri.parse(step.getVideoURL());
     }
 
     public static class StepState extends State {
