@@ -20,5 +20,19 @@
         </activity>
         <activity android:name=".modules.recipe.RecipeActivity" />
         <activity android:name=".modules.step.StepActivity" />
+
+        <receiver android:name=".modules.widgets.RecipeWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recipe_widget_provider_info" />
+        </receiver>
+
+        <service android:name=".modules.widgets.RecipeWidgetService" />
+
     </application>
+
 </manifest>
