@@ -9,12 +9,8 @@ import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.pedrolopesme.android.bakingapp.contract.RecipeWidgetContract;
-import com.pedrolopesme.android.bakingapp.models.Ingredient;
+import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Ingredients Widget Service
@@ -34,7 +30,7 @@ public class RecipeWidgetService extends IntentService {
      * @param context reference
      */
     public static void startActionUpdateRecipe(Context context) {
-        Log.d(LOG_TAG, "Running start action update recipe");
+        Log.i(LOG_TAG, "Running start action update recipe");
         Intent intent = new Intent(context, RecipeWidgetService.class);
         intent.setAction(ACTION_UPDATE_RECIPE_WIDGET);
         context.startService(intent);
@@ -42,7 +38,7 @@ public class RecipeWidgetService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.d(LOG_TAG, "Running on handle intent");
+        Log.i(LOG_TAG, "Running on handle intent");
         if (intent != null) {
             final String action = intent.getAction();
             if (action.equals(ACTION_UPDATE_RECIPE_WIDGET)) {
@@ -55,39 +51,11 @@ public class RecipeWidgetService extends IntentService {
      * Handle Update Recipe Action calls
      */
     private void handleUpdateRecipeAction() {
-        Log.d(LOG_TAG, "Hanlding update recipe action");
+        Log.i(LOG_TAG, "Handling update recipe action");
         final Cursor cursor = null;
         try {
-            Recipe recipe = new Recipe();
-            recipe.setName("Receita teste");
-
-            List<Ingredient> ingredientList = new ArrayList<>();
-            Ingredient i1 = new Ingredient();
-            i1.setIngredient("Ingrediente 1");
-            i1.setMeasure("1 litro");
-            i1.setQuantity(3);
-            ingredientList.add(i1);
-
-            Ingredient i2 = new Ingredient();
-            i2.setIngredient("Ingrediente 2");
-            i2.setMeasure("1 litro");
-            i2.setQuantity(3);
-            ingredientList.add(i2);
-
-            Ingredient i3 = new Ingredient();
-            i3.setIngredient("Ingrediente 2");
-            i3.setMeasure("1 litro");
-            i3.setQuantity(3);
-            ingredientList.add(i3);
-
-            recipe.setIngredients(ingredientList);
-
-            getContentResolver().query(RecipeWidgetContract.URI_RECIPE_WIDGET, null, null, null, null);
-            if (cursor != null) {
-                final String name = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetContract.RecipeWidgetEntry.COLUMN_NAME));
-                recipe.setName(name);
-            }
-
+            RecipeWidgetDao widgetDao = new RecipeWidgetDao(getContentResolver());
+            Recipe recipe = widgetDao.getRecipeWidget();
             AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
             int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
             RecipeWidgetProvider.updateRecipeWidgets(this, widgetManager, recipe, appWidgetIds);

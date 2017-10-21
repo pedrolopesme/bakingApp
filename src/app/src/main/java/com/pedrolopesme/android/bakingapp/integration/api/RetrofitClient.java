@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.integration;
+package com.pedrolopesme.android.bakingapp.integration.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

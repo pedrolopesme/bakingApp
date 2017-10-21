@@ -1,4 +1,4 @@
-package com.pedrolopesme.android.bakingapp.contract;
+package com.pedrolopesme.android.bakingapp.integration.contentProvider.recipeWidget;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -26,7 +26,10 @@ public class RecipeWidgetContract {
      **/
     public static final class RecipeWidgetEntry implements BaseColumns {
 
+        public static final String TABLE_NAME = "recipe_widget";
         public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_SERVINGS = "servings";
+        public static final String COLUMN_IMAGE = "image";
 
     }
 

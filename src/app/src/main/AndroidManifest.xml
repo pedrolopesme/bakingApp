@@ -34,7 +34,7 @@
         <service android:name=".modules.widgets.RecipeWidgetService" />
 
         <provider
-            android:name=".integration.contentProvider.RecipeWidgetContentProvider"
+            android:name=".integration.contentProvider.recipeWidget.RecipeWidgetContentProvider"
             android:authorities="com.pedrolopesme.android.bakingapp.provider"
             android:exported="true"
             android:permission="com.pedrolopesme.android.bakingapp.provider.READ_WRITE" />

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipeBinding;
+import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel;
 import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Recipe Fragment.
@@ -28,6 +30,7 @@ import butterknife.ButterKnife;
  */
 public final class RecipeFragment extends MultipleViewModelFragment {
 
+    private final String TAG_LOG = this.getClass().getSimpleName();
     public static final String TAG_RECIPE_FRAGMENT = "recipeFragment";
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
     public static final String COLUMNS_BUNDLE_NAME = "recipeFragmentColumns";
@@ -97,6 +100,12 @@ public final class RecipeFragment extends MultipleViewModelFragment {
             return (Recipe) arguments.getParcelable(RECIPE_BUNDLE_KEY);
         }
         return null;
+    }
+
+
+    @OnClick(R.id.bt_add_wdiget)
+    public void addToWidget() {
+        recipeViewModel.addToWidget();
     }
 
 

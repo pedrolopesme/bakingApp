@@ -6,9 +6,13 @@ import android.os.Parcel;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
+import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
+
+import butterknife.OnClick;
 
 /**
  * Recipe ViewModel
@@ -36,6 +40,14 @@ public final class RecipeViewModel extends ViewModel {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    public void addToWidget() {
+        Log.i(TAG_LOG, "Adding recipe to widget :" + recipe);
+        RecipeWidgetDao recipeWidgetDao = new RecipeWidgetDao(appContext.getContentResolver());
+        recipeWidgetDao.delete();
+        recipeWidgetDao.insert(recipe);
+        Log.i(TAG_LOG, "Recipe added to widget");
     }
 
     @Bindable

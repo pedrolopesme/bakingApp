@@ -1,7 +1,6 @@
 package com.pedrolopesme.android.bakingapp.integration.api;
 
 import com.pedrolopesme.android.bakingapp.integration.APIServiceFactory;
-import com.pedrolopesme.android.bakingapp.integration.RetrofitClient;
 
 /**
  * Retrofit API Service Factory

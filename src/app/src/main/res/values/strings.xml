@@ -17,5 +17,7 @@
 
     <!-- Widget -->
     <string name="widget_description"> Recipe Widget </string>
+    <string name="wiget_recipe_not_found">Recipe not found</string>
+    <string name="add_to_widget">Add to Widget</string>
 
 </resources>
