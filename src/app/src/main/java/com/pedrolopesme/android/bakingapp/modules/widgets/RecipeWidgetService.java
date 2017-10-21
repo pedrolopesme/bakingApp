@@ -5,9 +5,11 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.pedrolopesme.android.bakingapp.contract.RecipeWidgetContract;
 import com.pedrolopesme.android.bakingapp.models.Ingredient;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 
@@ -54,34 +56,48 @@ public class RecipeWidgetService extends IntentService {
      */
     private void handleUpdateRecipeAction() {
         Log.d(LOG_TAG, "Hanlding update recipe action");
-        // Do something to retrieve updated recipe
-        Recipe recipe = new Recipe();
-        recipe.setName("Receita teste");
+        final Cursor cursor = null;
+        try {
+            Recipe recipe = new Recipe();
+            recipe.setName("Receita teste");
 
-        List<Ingredient> ingredientList = new ArrayList<>();
-        Ingredient i1 = new Ingredient();
-        i1.setIngredient("Ingrediente 1");
-        i1.setMeasure("1 litro");
-        i1.setQuantity(3);
-        ingredientList.add(i1);
+            List<Ingredient> ingredientList = new ArrayList<>();
+            Ingredient i1 = new Ingredient();
+            i1.setIngredient("Ingrediente 1");
+            i1.setMeasure("1 litro");
+            i1.setQuantity(3);
+            ingredientList.add(i1);
 
-        Ingredient i2 = new Ingredient();
-        i2.setIngredient("Ingrediente 2");
-        i2.setMeasure("1 litro");
-        i2.setQuantity(3);
-        ingredientList.add(i2);
+            Ingredient i2 = new Ingredient();
+            i2.setIngredient("Ingrediente 2");
+            i2.setMeasure("1 litro");
+            i2.setQuantity(3);
+            ingredientList.add(i2);
 
-        Ingredient i3 = new Ingredient();
-        i3.setIngredient("Ingrediente 2");
-        i3.setMeasure("1 litro");
-        i3.setQuantity(3);
-        ingredientList.add(i3);
+            Ingredient i3 = new Ingredient();
+            i3.setIngredient("Ingrediente 2");
+            i3.setMeasure("1 litro");
+            i3.setQuantity(3);
+            ingredientList.add(i3);
 
-        recipe.setIngredients(ingredientList);
+            recipe.setIngredients(ingredientList);
 
-        AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
-        int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
-        RecipeWidgetProvider.updateRecipeWidgets(this, widgetManager, recipe, appWidgetIds);
+            getContentResolver().query(RecipeWidgetContract.URI_RECIPE_WIDGET, null, null, null, null);
+            if (cursor != null) {
+                final String name = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetContract.RecipeWidgetEntry.COLUMN_NAME));
+                recipe.setName(name);
+            }
+
+            AppWidgetManager widgetManager = AppWidgetManager.getInstance(this);
+            int[] appWidgetIds = widgetManager.getAppWidgetIds(new ComponentName(this, RecipeWidgetProvider.class));
+            RecipeWidgetProvider.updateRecipeWidgets(this, widgetManager, recipe, appWidgetIds);
+        } catch (Exception ex) {
+            Log.e(LOG_TAG, "Something went bad while trying to update recipe action", ex);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 
 }
