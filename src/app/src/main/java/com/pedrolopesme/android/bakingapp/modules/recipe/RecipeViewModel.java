@@ -10,6 +10,7 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
+import com.pedrolopesme.android.bakingapp.modules.widgets.RecipeWidgetService;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
 import butterknife.OnClick;
@@ -47,6 +48,7 @@ public final class RecipeViewModel extends ViewModel {
         RecipeWidgetDao recipeWidgetDao = new RecipeWidgetDao(appContext.getContentResolver());
         recipeWidgetDao.delete();
         recipeWidgetDao.insert(recipe);
+        RecipeWidgetService.startActionUpdateRecipe(appContext);
         Log.i(TAG_LOG, "Recipe added to widget");
     }
 
