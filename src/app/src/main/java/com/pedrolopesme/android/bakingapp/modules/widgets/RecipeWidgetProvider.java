@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.pedrolopesme.android.bakingapp.R;
+import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipes.RecipesActivity;
 
@@ -38,7 +39,7 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_recipe_provider);
 
-        views.setTextViewText(R.id.tv_recipe_ingredients, recipe.getName());
+        views.setTextViewText(R.id.tv_recipe_ingredients, new IngredientsFormatter(recipe.getIngredients()).simpleListFormat());
 
         // Setting up click event
         Intent intent = new Intent(context, RecipesActivity.class);

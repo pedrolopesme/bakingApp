@@ -30,6 +30,8 @@ public class RecipeWidgetContract {
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_SERVINGS = "servings";
         public static final String COLUMN_IMAGE = "image";
+        public static final String COLUMN_STEPSJSON = "stepsJson";
+        public static final String COLUMN_INGREDIENTSJSON = "ingredientsJson";
 
     }
 

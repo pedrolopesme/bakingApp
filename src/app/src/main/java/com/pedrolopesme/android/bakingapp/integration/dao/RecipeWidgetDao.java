@@ -5,8 +5,13 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.pedrolopesme.android.bakingapp.integration.contentProvider.recipeWidget.RecipeWidgetContract;
+import com.pedrolopesme.android.bakingapp.models.Ingredient;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Step;
+
+import java.util.Arrays;
 
 import static com.pedrolopesme.android.bakingapp.integration.contentProvider.recipeWidget.RecipeWidgetContract.RecipeWidgetEntry;
 
@@ -26,6 +31,10 @@ public class RecipeWidgetDao extends BaseDao implements IRecipeWidgetDao {
         values.put(RecipeWidgetEntry.COLUMN_NAME, recipe.getName());
         values.put(RecipeWidgetEntry.COLUMN_IMAGE, recipe.getImage());
         values.put(RecipeWidgetEntry.COLUMN_SERVINGS, recipe.getServings());
+
+        Gson gson = new Gson();
+        values.put(RecipeWidgetEntry.COLUMN_INGREDIENTSJSON, gson.toJson(recipe.getIngredients()));
+        values.put(RecipeWidgetEntry.COLUMN_STEPSJSON, gson.toJson(recipe.getSteps()));
         getContentResolver().insert(RecipeWidgetContract.URI_RECIPE_WIDGET, values);
     }
 
@@ -46,11 +55,19 @@ public class RecipeWidgetDao extends BaseDao implements IRecipeWidgetDao {
                 final String name = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetEntry.COLUMN_NAME));
                 final String image = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetEntry.COLUMN_IMAGE));
                 final int servings = cursor.getInt(cursor.getColumnIndexOrThrow(RecipeWidgetEntry.COLUMN_SERVINGS));
+                final String stepsJsonString = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetEntry.COLUMN_STEPSJSON));
+                final String ingredientsJsonString = cursor.getString(cursor.getColumnIndexOrThrow(RecipeWidgetEntry.COLUMN_INGREDIENTSJSON));
+
+                Gson gson = new Gson();
+                Step[] steps = gson.fromJson(stepsJsonString, Step[].class);
+                Ingredient[] ingredients = gson.fromJson(ingredientsJsonString, Ingredient[].class);
 
                 Recipe recipe = new Recipe();
                 recipe.setName(name);
                 recipe.setImage(image);
                 recipe.setServings(servings);
+                recipe.setSteps(Arrays.asList(steps));
+                recipe.setIngredients(Arrays.asList(ingredients));
                 return recipe;
             }
 

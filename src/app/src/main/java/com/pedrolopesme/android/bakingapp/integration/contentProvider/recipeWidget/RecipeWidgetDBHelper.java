@@ -25,7 +25,9 @@ public class RecipeWidgetDBHelper extends SQLiteOpenHelper {
                         RecipeWidgetEntry._ID + " INTEGER PRIMARY KEY, " +
                         RecipeWidgetEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                         RecipeWidgetEntry.COLUMN_SERVINGS + " INT, " +
-                        RecipeWidgetEntry.COLUMN_IMAGE + " TEXT NULL );";
+                        RecipeWidgetEntry.COLUMN_IMAGE + " TEXT NULL, " +
+                        RecipeWidgetEntry.COLUMN_STEPSJSON + " TEXT NULL, " +
+                        RecipeWidgetEntry.COLUMN_INGREDIENTSJSON + " TEXT NULL );";
         sqLiteDatabase.execSQL(SQL_CREATE_TABLE);
     }
 
