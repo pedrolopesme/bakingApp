@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorTitle">#000000</color>
+    <color name="colorPrimary">#FF4081</color>
+    <color name="colorPrimaryDark">#d23a6e</color>
+    <color name="colorAccent">#e78a27</color>
+    <color name="colorTitle">#FFFFFF</color>
 
     <!-- Recipe List -->
     <color name="mainTextColor">#FFFFFF</color>
