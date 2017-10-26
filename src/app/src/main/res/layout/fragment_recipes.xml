@@ -20,5 +20,6 @@
             android:layout_height="0px"
             android:layout_weight="1"
             bind:recyclerViewViewModel="@{viewModel}" />
+
     </LinearLayout>
 </layout>

@@ -14,7 +14,11 @@
         android:id="@+id/cl_recipe_item"
         android:layout_width="fill_parent"
         android:layout_height="120dp"
-        android:background="@color/colorAccent">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="7.5dp"
+        android:layout_marginBottom="7.5dp"
+        android:background="@drawable/rounded_border" >
 
         <ImageView
             android:id="@+id/iv_recipe_item_dish"
