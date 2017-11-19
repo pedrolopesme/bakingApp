@@ -4,7 +4,9 @@
     <color name="colorPrimaryDark">#d23a6e</color>
     <color name="colorAccent">#e78a27</color>
     <color name="colorTitle">#FFFFFF</color>
+    <color name="listItemTitle">#333333</color>
 
     <!-- Recipe List -->
     <color name="mainTextColor">#FFFFFF</color>
+    <color name="numberBg">#cccccc</color>
 </resources>

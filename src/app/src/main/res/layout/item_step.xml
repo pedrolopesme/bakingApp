@@ -13,22 +13,37 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_step_item"
         android:layout_width="fill_parent"
-        android:layout_height="120dp">
+        android:layout_height="wrap_content"
+        android:paddingBottom="14sp"
+        android:paddingTop="14sp">
+
+        <TextView
+            android:id="@+id/tv_step_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4sp"
+            android:layout_marginRight="4sp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle"
+            android:text="@{viewModel.stepNumber}"
+            android:theme="@style/listItem"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="1" />
 
         <TextView
             android:id="@+id/tv_step_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="sans-serif"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="@{viewModel.description}"
-            android:textColor="@color/colorAccent"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:theme="@style/listItem"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_step_number"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Recipe One Test" />
 
     </android.support.constraint.ConstraintLayout>
