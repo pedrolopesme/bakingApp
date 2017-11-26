@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -17,27 +18,58 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/mainList"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context="com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity">
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tv_recipe_ingredients"
+            <LinearLayout
+                android:id="@+id/mainList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{recipeViewModel.ingredients}" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context="com.pedrolopesme.android.bakingapp.modules.recipe.RecipeActivity">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_steps"
-                android:layout_width="match_parent"
-                android:layout_height="0px"
-                android:layout_weight="1"
-                bind:recyclerViewViewModel="@{stepsViewModel}" />
+                <TextView
+                    android:id="@+id/tv_recipe_ingredients_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ingredients_margin"
+                    android:layout_marginRight="@dimen/ingredients_margin"
+                    android:layout_marginTop="@dimen/ingredients_margin"
+                    android:text="@string/title_ingredients"
+                    android:theme="@style/recipeTitle" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_recipe_ingredients"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/title_margin"
+                    android:layout_marginLeft="@dimen/ingredients_margin"
+                    android:layout_marginRight="@dimen/ingredients_margin"
+                    android:layout_marginTop="@dimen/title_margin"
+                    android:text="@{recipeViewModel.ingredients}"
+                    android:theme="@style/ingredientsList" />
+
+                <TextView
+                    android:id="@+id/tv_recipe_steps_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/ingredients_margin"
+                    android:layout_marginRight="@dimen/ingredients_margin"
+                    android:text="@string/title_steps"
+                    android:theme="@style/recipeTitle" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_steps"
+                    android:layout_width="match_parent"
+                    android:layout_height="0px"
+                    android:layout_margin="@dimen/steps_margin"
+                    android:layout_weight="1"
+                    bind:recyclerViewViewModel="@{stepsViewModel}" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_add_widget"

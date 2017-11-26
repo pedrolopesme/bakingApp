@@ -14,6 +14,8 @@
     <string name="level_hard">HARD</string>
     <string name="recipe_not_found">Recipe Not Found</string>
     <string name="step_not_found">step_not_found</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="title_steps">Steps</string>
 
     <!-- Widget -->
     <string name="widget_description"> Recipe Widget </string>
@@ -22,4 +24,5 @@
 
     <!-- Messages -->
     <string name="msg_added_to_widget">Recipe Added to Home Screen Widget Successfully</string>
+
 </resources>

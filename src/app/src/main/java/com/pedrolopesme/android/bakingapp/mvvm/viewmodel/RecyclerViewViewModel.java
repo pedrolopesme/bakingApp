@@ -40,6 +40,8 @@ public abstract class RecyclerViewViewModel extends ViewModel {
         }
         recyclerView.setAdapter(getAdapter());
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setFocusable(false);
     }
 
     protected static class RecyclerViewViewModelState extends State {

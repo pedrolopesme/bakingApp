@@ -21,12 +21,12 @@
             android:id="@+id/tv_step_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4sp"
-            android:layout_marginRight="4sp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
             android:layout_marginStart="8dp"
             android:background="@drawable/circle"
             android:text="@{viewModel.stepNumber}"
-            android:theme="@style/listItem"
+            android:theme="@style/listItemNumber"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="1" />
@@ -37,14 +37,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:text="@{viewModel.description}"
             android:theme="@style/listItem"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_step_number"
             app:layout_constraintTop_toTopOf="parent"
-
             tools:text="Recipe One Test" />
 
     </android.support.constraint.ConstraintLayout>

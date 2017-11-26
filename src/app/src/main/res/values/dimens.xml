@@ -8,4 +8,9 @@ Refer to App Widget Documentation for margin information
 http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     -->
     <dimen name="widget_margin">8dp</dimen>
+
+    <dimen name="steps_margin">8dp</dimen>
+    <dimen name="ingredients_margin">24dp</dimen>
+
+    <dimen name="title_margin">16dp</dimen>
 </resources>

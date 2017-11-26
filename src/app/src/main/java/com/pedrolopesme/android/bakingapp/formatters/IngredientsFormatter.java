@@ -23,7 +23,9 @@ public class IngredientsFormatter {
             String separator = System.getProperty("line.separator");
             ;
             for (Ingredient ingredient : ingredients) {
-                sb.append(ingredient.getIngredient()).append(separator);
+                sb.append("\u25CF ")
+                        .append(ingredient.getIngredient())
+                        .append(separator);
             }
         }
         return sb.toString();
