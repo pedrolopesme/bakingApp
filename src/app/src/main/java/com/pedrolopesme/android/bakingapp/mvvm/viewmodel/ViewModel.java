@@ -1,10 +1,15 @@
 package com.pedrolopesme.android.bakingapp.mvvm.viewmodel;
 
+import android.app.Activity;
+import android.content.Context;
 import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+
+import com.pedrolopesme.android.bakingapp.R;
 
 /**
  * View Model Abstract Class
@@ -24,6 +29,17 @@ public abstract class ViewModel extends BaseObservable {
 
     @CallSuper
     public void onStop() {
+    }
+
+    /**
+     * Shows a snack message
+     *
+     * @param context
+     * @param viewId
+     * @param message
+     */
+    public void showSnackMessage(Context context, int viewId, int message) {
+        Snackbar.make(((Activity) context).getWindow().getDecorView().findViewById(viewId), message, Snackbar.LENGTH_LONG).show();
     }
 
     public static class State implements Parcelable {

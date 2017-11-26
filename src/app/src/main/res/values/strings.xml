@@ -20,4 +20,6 @@
     <string name="wiget_recipe_not_found">Recipe not found</string>
     <string name="add_to_widget">Add to Widget</string>
 
+    <!-- Messages -->
+    <string name="msg_added_to_widget">Recipe Added to Home Screen Widget Successfully</string>
 </resources>

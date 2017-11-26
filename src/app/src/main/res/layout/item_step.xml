@@ -44,6 +44,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_step_number"
             app:layout_constraintTop_toTopOf="parent"
+
             tools:text="Recipe One Test" />
 
     </android.support.constraint.ConstraintLayout>
