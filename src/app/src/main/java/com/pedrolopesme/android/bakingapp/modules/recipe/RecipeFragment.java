@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentRecipeBinding;
-import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.modules.recipe.RecipeViewModel;
 import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.modules.steps.StepsViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.MultipleViewModelFragment;
@@ -103,7 +101,7 @@ public final class RecipeFragment extends MultipleViewModelFragment {
     }
 
 
-    @OnClick(R.id.bt_add_wdiget)
+    @OnClick(R.id.fab_add_widget)
     public void addToWidget() {
         recipeViewModel.addToWidget();
     }
