@@ -39,7 +39,7 @@ public final class StepsItemViewModel extends ItemViewModel<Step> {
 
     @Bindable
     public String getStepNumber() {
-        return String.valueOf(step.getId() + 1);
+        return String.valueOf(step.getId());
     }
 
 
