@@ -70,6 +70,10 @@ public final class StepViewModel extends ViewModel {
         return Uri.parse(step.getVideoURL());
     }
 
+    public boolean hasVideoUrl() {
+        return step.getVideoURL() != null && !step.getVideoURL().isEmpty();
+    }
+
     public static class StepState extends State {
 
         private final Recipe recipe;

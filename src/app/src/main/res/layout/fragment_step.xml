@@ -23,7 +23,15 @@
                 android:id="@+id/vv_step_video"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:visibility="gone"
                 app:useDefaultControls="true" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                app:srcCompat="@drawable/ic_no_video" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -70,5 +78,7 @@
                 android:text="@{viewModel.instruction}"
                 android:theme="@style/listItem" />
         </LinearLayout>
+
+
     </LinearLayout>
 </layout>

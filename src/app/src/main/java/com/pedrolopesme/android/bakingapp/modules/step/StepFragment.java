@@ -74,9 +74,14 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        videoView = (VideoView) getView().findViewById(R.id.vv_step_video);
-        videoView.setOnPreparedListener(this);
-        videoView.setVideoURI(stepViewModel.getVideoUri());
+
+        if (stepViewModel.hasVideoUrl()) {
+            videoView = (VideoView) getView().findViewById(R.id.vv_step_video);
+            videoView.setOnPreparedListener(this);
+            videoView.setVideoURI(stepViewModel.getVideoUri());
+            videoView.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Nullable
