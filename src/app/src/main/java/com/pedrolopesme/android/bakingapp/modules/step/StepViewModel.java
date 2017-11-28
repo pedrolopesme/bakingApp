@@ -53,7 +53,7 @@ public final class StepViewModel extends ViewModel {
     @Bindable
     public String getStepNumber() {
         int stepIndex = recipe.getSteps().indexOf(step);
-        return String.valueOf(stepIndex + 1);
+        return String.valueOf(stepIndex);
     }
 
     @Bindable
