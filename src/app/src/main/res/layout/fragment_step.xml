@@ -15,17 +15,60 @@
         android:orientation="vertical"
         tools:context="com.pedrolopesme.android.bakingapp.modules.step.StepActivity">
 
-        <com.devbrackets.android.exomedia.ui.widget.VideoView
-            android:id="@+id/vv_step_video"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            app:useDefaultControls="true"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_step_description"
-            android:layout_width="match_parent"
+            <com.devbrackets.android.exomedia.ui.widget.VideoView
+                android:id="@+id/vv_step_video"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:useDefaultControls="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.instruction}" />
+            android:layout_margin="24dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_recipe_steps_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_step"
+                android:theme="@style/recipeTitle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_step_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/circle"
+                android:text="@{viewModel.stepNumber}"
+                android:theme="@style/listItemNumber"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="1" />
+
+            <TextView
+                android:id="@+id/tv_step_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:text="@{viewModel.instruction}"
+                android:theme="@style/listItem" />
+        </LinearLayout>
     </LinearLayout>
 </layout>
