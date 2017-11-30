@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
 /**
@@ -20,6 +21,7 @@ public final class StepViewModel extends ViewModel {
     private final Context appContext;
     private Recipe recipe;
     private Step step;
+    private StepsNavigation stepsNavigation;
 
     public StepViewModel(final Context context, final @Nullable State savedInstanceState) {
         super(savedInstanceState);
@@ -50,6 +52,10 @@ public final class StepViewModel extends ViewModel {
         this.step = step;
     }
 
+    public void setStepsNavigation(StepsNavigation stepsNavigation){
+        this.stepsNavigation = stepsNavigation;
+    }
+
     @Bindable
     public String getStepNumber() {
         return String.valueOf(step.getId());
@@ -71,6 +77,40 @@ public final class StepViewModel extends ViewModel {
 
     public boolean hasVideoUrl() {
         return step.getVideoURL() != null && !step.getVideoURL().isEmpty();
+    }
+
+    /**
+     * Moves to the next step. If its the last step, move to the first
+     *
+     * @param recipe
+     * @param currentStep
+     */
+    public void moveToNextStep(final Recipe recipe, final Step currentStep) {
+        if (recipe != null && currentStep != null) {
+            int nextStepIndex = recipe.getSteps().indexOf(currentStep) + 1;
+            if (nextStepIndex >= recipe.getSteps().size())
+                nextStepIndex = 0;
+
+            Step step = recipe.getSteps().get(nextStepIndex);
+            stepsNavigation.navigate(step);
+        }
+    }
+
+    /**
+     * Moves to the previous step. If its the first step, move to the last
+     *
+     * @param recipe
+     * @param currentStep
+     */
+    public void moveToPrevioustStep(final Recipe recipe, final Step currentStep) {
+        if (recipe != null && currentStep != null) {
+            int nextStepIndex = recipe.getSteps().indexOf(currentStep) -1;
+            if (nextStepIndex < 0)
+                nextStepIndex = recipe.getSteps().size() - 1;
+
+            Step step = recipe.getSteps().get(nextStepIndex);
+            stepsNavigation.navigate(step);
+        }
     }
 
     public static class StepState extends State {

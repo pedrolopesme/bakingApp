@@ -25,5 +25,7 @@
 
     <!-- Messages -->
     <string name="msg_added_to_widget">Recipe Added to Home Screen Widget Successfully</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
 
 </resources>

@@ -100,12 +100,10 @@ public final class RecipeFragment extends MultipleViewModelFragment {
         return null;
     }
 
-
     @OnClick(R.id.fab_add_widget)
     public void addToWidget() {
         recipeViewModel.addToWidget();
     }
-
 
     /**
      * Creates steps navigation

@@ -9,76 +9,125 @@
             type="com.pedrolopesme.android.bakingapp.modules.step.StepViewModel" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.pedrolopesme.android.bakingapp.modules.step.StepActivity">
+        android:fillViewport="true">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.pedrolopesme.android.bakingapp.modules.step.StepActivity">
 
-            <com.devbrackets.android.exomedia.ui.widget.VideoView
-                android:id="@+id/vv_step_video"
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:visibility="gone"
-                app:useDefaultControls="true" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                app:srcCompat="@drawable/ic_no_video" />
+                <com.devbrackets.android.exomedia.ui.widget.VideoView
+                    android:id="@+id/vv_step_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:visibility="gone"
+                    app:useDefaultControls="true" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    app:srcCompat="@drawable/ic_no_video" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_recipe_steps_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_step"
+                    android:theme="@style/recipeTitle" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_step_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/circle"
+                    android:text="@{viewModel.stepNumber}"
+                    android:theme="@style/listItemNumber"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="1" />
+
+                <TextView
+                    android:id="@+id/tv_step_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@{viewModel.instruction}"
+                    android:theme="@style/listItem" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/tv_step_left"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:contentDescription="@string/previous"
+                        app:srcCompat="@drawable/ic_arrow_left" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/tv_step_right"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:contentDescription="@string/next"
+                        app:srcCompat="@drawable/ic_arrow_right" />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_recipe_steps_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_step"
-                android:theme="@style/recipeTitle" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_step_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/circle"
-                android:text="@{viewModel.stepNumber}"
-                android:theme="@style/listItemNumber"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="1" />
-
-            <TextView
-                android:id="@+id/tv_step_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:text="@{viewModel.instruction}"
-                android:theme="@style/listItem" />
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </ScrollView>
 </layout>

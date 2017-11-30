@@ -31,10 +31,14 @@ public class StepActivity extends BaseActivity {
         renderActionBar(recipe.getName());
         setContentView(R.layout.activity_step);
 
-        createLayout(recipe, step);
+        if (findViewById(R.id.fl_step_container) != null) {
+            createLayout(recipe, step, 1);
+        } else {
+            createLayout(recipe, step, 2);
+        }
     }
 
-    private void createLayout(Recipe recipe, Step step) {
+    private void createLayout(Recipe recipe, Step step, int columns) {
         Log.d(getTagName(), "Creating layout with Step Fragment for Recipe " + recipe);
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment stepFragment = fragmentManager.findFragmentByTag(StepsNavigation.TAG_STEP_FRAGMENT);
@@ -45,6 +49,7 @@ public class StepActivity extends BaseActivity {
             Bundle bundle = new Bundle();
             bundle.putParcelable(StepFragment.RECIPE_BUNDLE_KEY, recipe);
             bundle.putParcelable(StepFragment.STEP_BUNDLE_KEY, step);
+            bundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, columns);
             stepFragment = new StepFragment();
             stepFragment.setArguments(bundle);
 
@@ -59,6 +64,7 @@ public class StepActivity extends BaseActivity {
             Bundle bundle = stepFragment.getArguments();
             bundle.putParcelable(StepFragment.RECIPE_BUNDLE_KEY, recipe);
             bundle.putParcelable(StepFragment.STEP_BUNDLE_KEY, step);
+            bundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, columns);
         }
     }
 

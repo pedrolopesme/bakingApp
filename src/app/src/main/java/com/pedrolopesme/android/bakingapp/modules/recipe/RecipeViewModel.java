@@ -11,6 +11,7 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.modules.widgets.RecipeWidgetService;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
@@ -62,6 +63,7 @@ public final class RecipeViewModel extends ViewModel {
         else
             return "";
     }
+
 
     @Override
     public RecipeState getInstanceState() {

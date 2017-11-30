@@ -14,11 +14,13 @@ import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentStepBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.models.Step;
+import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Step Fragment
@@ -55,6 +57,7 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         Log.d(getTagName(), "Step found " + step + " for the recipe " + recipe);
         stepViewModel.setRecipe(recipe);
         stepViewModel.setStep(step);
+        stepViewModel.setStepsNavigation(createStepsNavigation());
 
         View root = inflater.inflate(R.layout.fragment_step, container, false);
         FragmentStepBinding binding = FragmentStepBinding.bind(root);
@@ -69,6 +72,18 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         View root = inflater.inflate(R.layout.fragment_recipe_not_found, container, false);
         ButterKnife.bind(this, root);
         return root;
+    }
+
+    @OnClick(R.id.tv_step_right)
+    public void moveToNext() {
+        Log.d(getTagName(), "Moving the next step");
+        stepViewModel.moveToNextStep(recipe, step);
+    }
+
+    @OnClick(R.id.tv_step_left)
+    public void moveToPrevious() {
+        Log.d(getTagName(), "Moving the previous step");
+        stepViewModel.moveToPrevioustStep(recipe, step);
     }
 
     @Override
@@ -118,5 +133,24 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
 
     @Override
     public void onPrepared() {
+    }
+
+    /**
+     * Creates steps navigation
+     *
+     * @return steps navigation
+     */
+    private StepsNavigation createStepsNavigation() {
+        Bundle bundle = getArguments();
+        Integer panels = bundle.getInt(COLUMNS_BUNDLE_NAME);
+
+        switch (panels) {
+            case 1:
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager(), recipe);
+            case 2:
+                return new StepsNavigation(StepsNavigation.Panels.TWO, getContext(), getFragmentManager(), recipe);
+            default:
+                return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager(), recipe);
+        }
     }
 }
