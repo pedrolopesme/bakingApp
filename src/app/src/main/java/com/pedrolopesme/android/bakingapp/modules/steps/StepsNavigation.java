@@ -64,6 +64,7 @@ public class StepsNavigation {
     private void navigateToFragment(Step step) {
         Log.d(TAG_LOG, "Navigation to fragment");
         Bundle bundle = new Bundle();
+        bundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, 2);
         bundle.putParcelable(StepActivity.RECIPE_BUNDLE_KEY, recipe);
         bundle.putParcelable(StepActivity.STEP_BUNDLE_KEY, step);
 
