@@ -1,6 +1,6 @@
 package com.pedrolopesme.android.bakingapp.modules.step;
 
-import android.net.Uri;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -18,9 +18,9 @@ import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 /**
  * Step Fragment
@@ -33,6 +33,7 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
     public static final String STEP_BUNDLE_KEY = "STEP_BUNDLE_KEY";
     public static final String COLUMNS_BUNDLE_NAME = "stepFragmentColumns";
+    public static final String LANDSCAPE_MODE = "stepLandscapeMode";
 
     private StepViewModel stepViewModel;
     private Recipe recipe;
@@ -45,10 +46,17 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
 
         recipe = extractRecipeFromArguments();
         step = extractStepFromArguments();
+        int currentOrientation = getResources().getConfiguration().orientation;
+
         if (recipe == null || step == null)
             return createViewStepNotFound(inflater, container, savedInstanceState);
-        else
-            return createViewStepFound(inflater, container, savedInstanceState);
+        else {
+            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE && getResources().getBoolean(R.bool.is_phone)){
+                return createViewStepVideoFullScreen(inflater, container, savedInstanceState);
+            } else {
+                return createViewStepFound(inflater, container, savedInstanceState);
+            }
+        }
     }
 
     private View createViewStepFound(final LayoutInflater inflater, final ViewGroup container,
@@ -67,6 +75,19 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         return root;
     }
 
+    private View createViewStepVideoFullScreen(final LayoutInflater inflater, final ViewGroup container,
+                                               final Bundle savedInstanceState) {
+        Log.d(getTagName(), "Step found " + step + " for the recipe " + recipe);
+
+        stepViewModel.setRecipe(recipe);
+        stepViewModel.setStep(step);
+        stepViewModel.setStepsNavigation(createStepsNavigation());
+
+        View root = inflater.inflate(R.layout.fragment_step_videoonly, container, false);
+        ButterKnife.bind(this, root);
+        return root;
+    }
+
     private View createViewStepNotFound(final LayoutInflater inflater, final ViewGroup container,
                                         final Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recipe_not_found, container, false);
@@ -74,12 +95,14 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         return root;
     }
 
+    @Optional
     @OnClick(R.id.tv_step_right)
     public void moveToNext() {
         Log.d(getTagName(), "Moving the next step");
         stepViewModel.moveToNextStep(recipe, step);
     }
 
+    @Optional
     @OnClick(R.id.tv_step_left)
     public void moveToPrevious() {
         Log.d(getTagName(), "Moving the previous step");

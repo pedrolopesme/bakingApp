@@ -57,7 +57,7 @@ public final class RecipesViewModel extends RecyclerViewViewModel {
 
     @Override
     protected RecyclerView.LayoutManager createLayoutManager() {
-        if (appContext.getResources().getBoolean(R.bool.is_table))
+        if (appContext.getResources().getBoolean(R.bool.is_tablet))
             return new GridLayoutManager(appContext, RECYCLER_VIEW_LAYOUT_COLUMNS);
         else
             return new LinearLayoutManager(appContext);

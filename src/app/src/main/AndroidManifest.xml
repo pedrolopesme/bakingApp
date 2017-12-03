@@ -11,14 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".modules.recipes.RecipesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".modules.recipe.RecipeActivity" />
-        <activity android:name=".modules.step.StepActivity" />
+
+        <activity
+            android:name=".modules.step.StepActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <receiver android:name=".modules.widgets.RecipeWidgetProvider">
             <intent-filter>
