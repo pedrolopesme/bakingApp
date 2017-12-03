@@ -1,7 +1,10 @@
 package com.pedrolopesme.android.bakingapp.mvvm.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
@@ -74,5 +77,16 @@ public abstract class MultipleViewModelFragment extends Fragment {
                 if(state.getClass() == desiredState) return state;
         }
         return null;
+    }
+
+    /**
+     * Shows a snack message
+     *
+     * @param context
+     * @param viewId
+     * @param message
+     */
+    public void showSnackMessage(Context context, int viewId, int message) {
+        Snackbar.make(getActivity().findViewById(viewId), message, Snackbar.LENGTH_LONG).show();
     }
 }

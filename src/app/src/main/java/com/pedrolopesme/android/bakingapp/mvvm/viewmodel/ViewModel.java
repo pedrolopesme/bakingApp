@@ -31,17 +31,6 @@ public abstract class ViewModel extends BaseObservable {
     public void onStop() {
     }
 
-    /**
-     * Shows a snack message
-     *
-     * @param context
-     * @param viewId
-     * @param message
-     */
-    public void showSnackMessage(Context context, int viewId, int message) {
-        Snackbar.make(((Activity) context).getWindow().getDecorView().findViewById(viewId), message, Snackbar.LENGTH_LONG).show();
-    }
-
     public static class State implements Parcelable {
 
         protected State(ViewModel viewModel) {

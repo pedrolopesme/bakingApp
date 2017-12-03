@@ -103,6 +103,7 @@ public final class RecipeFragment extends MultipleViewModelFragment {
     @OnClick(R.id.fab_add_widget)
     public void addToWidget() {
         recipeViewModel.addToWidget();
+        showSnackMessage(getContext(), R.id.cl_activiy_recipe_main, R.string.msg_added_to_widget);
     }
 
     /**

@@ -4,18 +4,14 @@ import android.content.Context;
 import android.databinding.Bindable;
 import android.os.Parcel;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.formatters.IngredientsFormatter;
 import com.pedrolopesme.android.bakingapp.integration.dao.RecipeWidgetDao;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
-import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.modules.widgets.RecipeWidgetService;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
-
-import butterknife.OnClick;
 
 /**
  * Recipe ViewModel
@@ -23,13 +19,13 @@ import butterknife.OnClick;
 public final class RecipeViewModel extends ViewModel {
 
     private final String TAG_LOG = this.getClass().getSimpleName();
-    private final Context appContext;
+    private final Context context;
     private Recipe recipe;
 
     public RecipeViewModel(final Context context, final @Nullable State savedInstanceState) {
         super(savedInstanceState);
         Log.d(TAG_LOG, "Creating Recipe ViewModel");
-        appContext = context;
+        this.context = context;
 
         if (savedInstanceState instanceof RecipeState) {
             recipe = ((RecipeState) savedInstanceState).recipe;
@@ -47,12 +43,10 @@ public final class RecipeViewModel extends ViewModel {
 
     public void addToWidget() {
         Log.i(TAG_LOG, "Adding recipe to widget :" + recipe);
-        RecipeWidgetDao recipeWidgetDao = new RecipeWidgetDao(appContext.getContentResolver());
+        RecipeWidgetDao recipeWidgetDao = new RecipeWidgetDao(context.getContentResolver());
         recipeWidgetDao.delete();
         recipeWidgetDao.insert(recipe);
-        RecipeWidgetService.startActionUpdateRecipe(appContext);
-
-        showSnackMessage(appContext, R.id.cl_activiy_recipe_main, R.string.msg_added_to_widget);
+        RecipeWidgetService.startActionUpdateRecipe(context);
         Log.i(TAG_LOG, "Recipe added to widget");
     }
 
