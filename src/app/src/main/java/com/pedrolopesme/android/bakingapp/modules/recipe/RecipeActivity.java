@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
+import com.pedrolopesme.android.bakingapp.models.Step;
+import com.pedrolopesme.android.bakingapp.modules.step.StepActivity;
 import com.pedrolopesme.android.bakingapp.modules.step.StepFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.activity.BaseActivity;
 
@@ -86,9 +88,12 @@ public class RecipeActivity extends BaseActivity {
 
 
             stepsFragment = new StepFragment();
-            Bundle recipesBundle = new Bundle();
-            recipesBundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, columns);
-            stepsFragment.setArguments(recipesBundle);
+            Step firstStep = recipe.getSteps().get(0);
+            Bundle stepBundle = new Bundle();
+            stepBundle.putInt(StepFragment.COLUMNS_BUNDLE_NAME, columns);
+            stepBundle.putParcelable(StepActivity.RECIPE_BUNDLE_KEY, recipe);
+            stepBundle.putParcelable(StepActivity.STEP_BUNDLE_KEY, firstStep);
+            stepsFragment.setArguments(stepBundle);
 
             fragmentManager.beginTransaction()
                     .add(R.id.fl_recipe_container, recipeFragment, RecipeFragment.TAG_RECIPE_FRAGMENT)

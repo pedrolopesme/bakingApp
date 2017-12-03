@@ -72,11 +72,14 @@ public final class StepViewModel extends ViewModel {
     }
 
     public Uri getVideoUri() {
-        return Uri.parse(step.getVideoURL());
+        if(step != null)
+            return Uri.parse(step.getVideoURL());
+
+        return null;
     }
 
     public boolean hasVideoUrl() {
-        return step.getVideoURL() != null && !step.getVideoURL().isEmpty();
+        return step != null && step.getVideoURL() != null && !step.getVideoURL().isEmpty();
     }
 
     /**
