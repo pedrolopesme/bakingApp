@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Baking App</string>
+    <string name="image_recipe_description">Recipe</string>
+    <string name="image_servings_description">Servings</string>
+
+    <!-- Activity Titles -->
+    <string name="activity_recipes">Recipes List</string>
+    <string name="activity_recipe">Recipe</string>
+
+    <!-- Tiles & labels -->
+    <string name="level_default">--</string>
+    <string name="level_easy">EASY</string>
+    <string name="level_medium">MEDIUM</string>
+    <string name="level_hard">HARD</string>
+    <string name="recipe_not_found">Recipe Not Found</string>
+    <string name="step_not_found">step_not_found</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="title_steps">Steps</string>
+    <string name="title_step">Step</string>
+
+    <!-- Widget -->
+    <string name="widget_description"> Recipe Widget </string>
+    <string name="wiget_recipe_not_found">Recipe not found</string>
+    <string name="add_to_widget">Add to Widget</string>
+
+    <!-- Messages -->
+    <string name="msg_added_to_widget">Recipe Added to Home Screen Widget Successfully</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+
+</resources>

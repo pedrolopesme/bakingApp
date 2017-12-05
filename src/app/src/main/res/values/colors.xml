@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF4081</color>
+    <color name="colorPrimaryDark">#d23a6e</color>
+    <color name="colorAccent">#f9ce62</color>
+    <color name="colorTitle">#FFFFFF</color>
+    <color name="listItemTitle">#333333</color>
+
+    <!-- Recipe List -->
+    <color name="mainTextColor">#FFFFFF</color>
+    <color name="numberBg">#cccccc</color>
+</resources>
