@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:launchMode="singleTop">
 
         <activity android:name=".modules.recipes.RecipesActivity">
             <intent-filter>
@@ -19,11 +20,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".modules.recipe.RecipeActivity" />
+        <activity
+            android:name=".modules.recipe.RecipeActivity"
+            android:parentActivityName=".modules.recipes.RecipesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".modules.recipes.RecipesActivity" />
+        </activity>
 
         <activity
             android:name=".modules.step.StepActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:parentActivityName=".modules.recipe.RecipeActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".modules.recipe.RecipeActivity" />
+        </activity>
 
         <receiver android:name=".modules.widgets.RecipeWidgetProvider">
             <intent-filter>
