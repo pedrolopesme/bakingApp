@@ -1,6 +1,7 @@
 package com.pedrolopesme.android.bakingapp.modules.recipes;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -35,30 +36,13 @@ public class RecipesActivityTest {
 
     @Test
     public void testRecipesAreDisplayed() {
-        onView(withId(R.id.rv_recipes))
+        onView(withId(R.id.fl_recipes_container))
                 .check(matches((isDisplayed())));
 
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_name))
-                .check(matches(isDisplayed()));
-
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_servings))
-                .check(matches(isDisplayed()));
-
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_level))
-                .check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void testClickAtFirstRecipe() {
         onView(withId(R.id.rv_recipes))
-                .perform(actionOnItemAtPosition(0, click()));
-
-        CharSequence title = InstrumentationRegistry.getTargetContext().getString(R.string.activity_recipe);
-        matchToolbarTitle(title);
+                .check(matches((isDisplayed())));
     }
+
 
     @Test
     public void testToolbarTitle() {

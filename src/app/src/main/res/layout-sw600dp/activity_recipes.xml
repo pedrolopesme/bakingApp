@@ -12,5 +12,12 @@
         android:layout_height="match_parent"
         tools:context=".modules.recipes.RecipesActivity" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recipes"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+         />
+
 
 </LinearLayout>
