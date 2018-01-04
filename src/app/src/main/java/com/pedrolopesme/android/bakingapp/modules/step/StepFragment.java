@@ -1,15 +1,31 @@
 package com.pedrolopesme.android.bakingapp.modules.step;
 
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.devbrackets.android.exomedia.listener.OnPreparedListener;
-import com.devbrackets.android.exomedia.ui.widget.VideoView;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.trackselection.AdaptiveVideoTrackSelection;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.BandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.FragmentStepBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
@@ -18,6 +34,7 @@ import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Optional;
@@ -27,7 +44,7 @@ import butterknife.Optional;
  * <p>
  * This fragment shows step info
  */
-public final class StepFragment extends ViewModelFragment implements OnPreparedListener {
+public final class StepFragment extends ViewModelFragment {
 
     public static final String TAG_STEP_FRAGMENT = "stepFragment";
     public static final String RECIPE_BUNDLE_KEY = "RECIPE_BUNDLE_KEY";
@@ -38,7 +55,13 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
     private StepViewModel stepViewModel;
     private Recipe recipe;
     private Step step;
-    private VideoView videoView;
+    private SimpleExoPlayer player;
+    private BandwidthMeter bandwidthMeter;
+    private Handler mainHandler;
+
+    @BindView(R.id.vv_step_video)
+    protected SimpleExoPlayerView simpleExoPlayerView;
+
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -47,11 +70,13 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         recipe = extractRecipeFromArguments();
         step = extractStepFromArguments();
         int currentOrientation = getResources().getConfiguration().orientation;
+        mainHandler = new Handler();
+        bandwidthMeter = new DefaultBandwidthMeter();
 
         if (recipe == null || step == null)
             return createViewStepNotFound(inflater, container, savedInstanceState);
         else {
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE && getResources().getBoolean(R.bool.is_phone)){
+            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE && getResources().getBoolean(R.bool.is_phone)) {
                 return createViewStepVideoFullScreen(inflater, container, savedInstanceState);
             } else {
                 return createViewStepFound(inflater, container, savedInstanceState);
@@ -114,12 +139,30 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         super.onViewCreated(view, savedInstanceState);
 
         if (stepViewModel.hasVideoUrl()) {
-            videoView = (VideoView) getView().findViewById(R.id.vv_step_video);
-            videoView.setOnPreparedListener(this);
-            videoView.setVideoURI(stepViewModel.getVideoUri());
-            videoView.setVisibility(View.VISIBLE);
+            simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
+            initializePlayer(stepViewModel.getVideoUri());
+            simpleExoPlayerView.setVisibility(View.VISIBLE);
+        } else {
+            simpleExoPlayerView.setVisibility(View.GONE);
+            player = null;
         }
 
+    }
+
+    private void initializePlayer(Uri mediaUri) {
+        if (player == null) {
+            TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveVideoTrackSelection.Factory(bandwidthMeter);
+            DefaultTrackSelector trackSelector = new DefaultTrackSelector(mainHandler, videoTrackSelectionFactory);
+            LoadControl loadControl = new DefaultLoadControl();
+
+            player = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
+            simpleExoPlayerView.setPlayer(player);
+
+            String userAgent = Util.getUserAgent(getContext(), "Baking App");
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
+            player.prepare(mediaSource);
+            player.setPlayWhenReady(true);
+        }
     }
 
     @Nullable
@@ -154,9 +197,6 @@ public final class StepFragment extends ViewModelFragment implements OnPreparedL
         return null;
     }
 
-    @Override
-    public void onPrepared() {
-    }
 
     /**
      * Creates steps navigation
