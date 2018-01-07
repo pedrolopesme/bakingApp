@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -33,6 +34,7 @@ import com.pedrolopesme.android.bakingapp.models.Step;
 import com.pedrolopesme.android.bakingapp.modules.steps.StepsNavigation;
 import com.pedrolopesme.android.bakingapp.mvvm.fragment.ViewModelFragment;
 import com.pedrolopesme.android.bakingapp.mvvm.viewmodel.ViewModel;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,12 +57,15 @@ public final class StepFragment extends ViewModelFragment {
     private StepViewModel stepViewModel;
     private Recipe recipe;
     private Step step;
-    private SimpleExoPlayer player;
     private BandwidthMeter bandwidthMeter;
     private Handler mainHandler;
+    private SimpleExoPlayer player;
 
     @BindView(R.id.vv_step_video)
     protected SimpleExoPlayerView simpleExoPlayerView;
+
+    @BindView(R.id.iv_step_thumb)
+    protected ImageView thumbImage;
 
 
     @Override
@@ -137,6 +142,10 @@ public final class StepFragment extends ViewModelFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        if(stepViewModel.getStepThumbUri() != null) {
+            Picasso.with(getContext()).load(stepViewModel.getStepThumbUri()).into(thumbImage);
+        }
 
         if (stepViewModel.hasVideoUrl()) {
             simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
