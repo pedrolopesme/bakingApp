@@ -3,6 +3,7 @@ package com.pedrolopesme.android.bakingapp.modules.recipes;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.Bindable;
+import android.net.Uri;
 import android.util.Log;
 
 import com.pedrolopesme.android.bakingapp.R;
@@ -30,6 +31,15 @@ public final class RecipeItemViewModel extends ItemViewModel<Recipe> {
         recipe = item;
         notifyChange();
     }
+
+
+    public Uri getStepThumbUri() {
+        if (recipe != null && recipe.getLastStepImage() != null)
+            return Uri.parse(recipe.getLastStepImage());
+
+        return null;
+    }
+
 
     /**
      * Opens a Recipe Activity from the current recipe item
