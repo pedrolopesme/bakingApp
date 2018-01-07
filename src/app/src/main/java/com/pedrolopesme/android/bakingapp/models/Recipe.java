@@ -79,6 +79,13 @@ public final class Recipe implements Parcelable {
         this.steps = steps;
     }
 
+    public String getLastStepImage() {
+        if (steps != null && steps.size() > 0)
+            return steps.get(steps.size() - 1).getThumbnailURL();
+
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +

@@ -21,6 +21,7 @@ public class RecipeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Log.d(getTagName(), "Creating recipe activity");
         recipe = extractRecipeFromIntent();

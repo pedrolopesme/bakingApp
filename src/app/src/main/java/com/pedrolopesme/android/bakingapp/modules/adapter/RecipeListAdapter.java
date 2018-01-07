@@ -2,20 +2,24 @@ package com.pedrolopesme.android.bakingapp.modules.adapter;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.pedrolopesme.android.bakingapp.R;
 import com.pedrolopesme.android.bakingapp.databinding.ItemRecipeBinding;
 import com.pedrolopesme.android.bakingapp.models.Recipe;
 import com.pedrolopesme.android.bakingapp.modules.recipes.RecipeItemViewModel;
 import com.pedrolopesme.android.bakingapp.mvvm.adapter.RecyclerViewAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -27,6 +31,10 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
     private final String TAG_LOG = this.getClass().getSimpleName();
 
     private Context context;
+
+    @Nullable
+    @BindView(R.id.iv_recipe_item_dish)
+    protected ImageView thumbImage;
 
     /**
      * Starts RecipeListAdapter injecting application context
@@ -48,6 +56,11 @@ public final class RecipeListAdapter extends RecyclerViewAdapter<Recipe, RecipeI
         RecipeItemViewModel viewModel = new RecipeItemViewModel(context);
         ItemRecipeBinding binding = ItemRecipeBinding.bind(itemView);
         binding.setViewModel(viewModel);
+        
+        if (thumbImage != null && viewModel.getStepThumbUri() != null) {
+            Picasso.with(context).load(viewModel.getStepThumbUri()).into(thumbImage);
+        }
+
         return new RecipeViewHolder(itemView, binding, viewModel);
     }
 

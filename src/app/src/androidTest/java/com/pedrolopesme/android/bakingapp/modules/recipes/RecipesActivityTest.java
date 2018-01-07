@@ -12,13 +12,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static com.pedrolopesme.android.bakingapp.matchers.ActionBarMatcher.matchToolbarTitle;
-import static com.pedrolopesme.android.bakingapp.utils.TestUtils.withRecyclerView;
+import static org.hamcrest.CoreMatchers.allOf;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -35,30 +33,13 @@ public class RecipesActivityTest {
 
     @Test
     public void testRecipesAreDisplayed() {
-        onView(withId(R.id.rv_recipes))
+        onView(withId(R.id.fl_recipes_container))
                 .check(matches((isDisplayed())));
 
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_name))
-                .check(matches(isDisplayed()));
-
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_servings))
-                .check(matches(isDisplayed()));
-
-        onView(withRecyclerView(R.id.rv_recipes)
-                .atPositionOnView(1, R.id.tv_recipe_item_level))
-                .check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.rv_recipes), isDisplayed()))
+                .check(matches((isDisplayed())));
     }
 
-    @Test
-    public void testClickAtFirstRecipe() {
-        onView(withId(R.id.rv_recipes))
-                .perform(actionOnItemAtPosition(0, click()));
-
-        CharSequence title = InstrumentationRegistry.getTargetContext().getString(R.string.activity_recipe);
-        matchToolbarTitle(title);
-    }
 
     @Test
     public void testToolbarTitle() {

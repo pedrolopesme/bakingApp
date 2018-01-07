@@ -52,8 +52,15 @@ public final class StepViewModel extends ViewModel {
         this.step = step;
     }
 
-    public void setStepsNavigation(StepsNavigation stepsNavigation){
+    public void setStepsNavigation(StepsNavigation stepsNavigation) {
         this.stepsNavigation = stepsNavigation;
+    }
+
+    public Uri getStepThumbUri() {
+        if (step != null && step.getThumbnailURL() != null)
+            return Uri.parse(step.getThumbnailURL());
+
+        return null;
     }
 
     @Bindable
@@ -72,7 +79,7 @@ public final class StepViewModel extends ViewModel {
     }
 
     public Uri getVideoUri() {
-        if(step != null)
+        if (step != null)
             return Uri.parse(step.getVideoURL());
 
         return null;
@@ -107,7 +114,7 @@ public final class StepViewModel extends ViewModel {
      */
     public void moveToPrevioustStep(final Recipe recipe, final Step currentStep) {
         if (recipe != null && currentStep != null) {
-            int nextStepIndex = recipe.getSteps().indexOf(currentStep) -1;
+            int nextStepIndex = recipe.getSteps().indexOf(currentStep) - 1;
             if (nextStepIndex < 0)
                 nextStepIndex = recipe.getSteps().size() - 1;
 
