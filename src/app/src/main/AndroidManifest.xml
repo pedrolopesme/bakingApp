@@ -30,7 +30,6 @@
 
         <activity
             android:name=".modules.step.StepActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".modules.recipe.RecipeActivity">
 
             <meta-data

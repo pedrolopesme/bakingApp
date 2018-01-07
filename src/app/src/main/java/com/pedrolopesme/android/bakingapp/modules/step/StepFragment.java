@@ -64,7 +64,7 @@ public final class StepFragment extends ViewModelFragment {
     @BindView(R.id.vv_step_video)
     protected SimpleExoPlayerView simpleExoPlayerView;
 
-    @BindView(R.id.iv_step_thumb)
+    @Nullable @BindView(R.id.iv_step_thumb)
     protected ImageView thumbImage;
 
 
@@ -74,14 +74,13 @@ public final class StepFragment extends ViewModelFragment {
 
         recipe = extractRecipeFromArguments();
         step = extractStepFromArguments();
-        int currentOrientation = getResources().getConfiguration().orientation;
         mainHandler = new Handler();
         bandwidthMeter = new DefaultBandwidthMeter();
 
         if (recipe == null || step == null)
             return createViewStepNotFound(inflater, container, savedInstanceState);
         else {
-            if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE && getResources().getBoolean(R.bool.is_phone)) {
+            if (getResources().getBoolean(R.bool.is_landscape) && getResources().getBoolean(R.bool.is_phone)) {
                 return createViewStepVideoFullScreen(inflater, container, savedInstanceState);
             } else {
                 return createViewStepFound(inflater, container, savedInstanceState);
@@ -143,7 +142,7 @@ public final class StepFragment extends ViewModelFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(stepViewModel.getStepThumbUri() != null) {
+        if (thumbImage != null && stepViewModel.getStepThumbUri() != null) {
             Picasso.with(getContext()).load(stepViewModel.getStepThumbUri()).into(thumbImage);
         }
 
