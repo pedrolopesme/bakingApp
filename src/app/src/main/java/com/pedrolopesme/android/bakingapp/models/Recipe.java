@@ -2,6 +2,7 @@ package com.pedrolopesme.android.bakingapp.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.Expose;
 
@@ -79,7 +80,16 @@ public final class Recipe implements Parcelable {
         this.steps = steps;
     }
 
-    public String getLastStepImage() {
+    /**
+     * Try to get recipe's image from the root image field or
+     * the last step - if it has an image.
+     *
+     * @return image url
+     */
+    public String getRecipeAvailableImage() {
+        if (!TextUtils.isEmpty(image)) {
+            return image;
+        }
         if (steps != null && steps.size() > 0)
             return steps.get(steps.size() - 1).getThumbnailURL();
 
