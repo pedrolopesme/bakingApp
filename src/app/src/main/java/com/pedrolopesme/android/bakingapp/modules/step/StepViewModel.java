@@ -89,6 +89,8 @@ public final class StepViewModel extends ViewModel {
         return step != null && step.getVideoURL() != null && !step.getVideoURL().isEmpty();
     }
 
+
+
     /**
      * Moves to the next step. If its the last step, move to the first
      *
