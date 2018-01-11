@@ -34,8 +34,8 @@ public final class RecipeItemViewModel extends ItemViewModel<Recipe> {
 
 
     public Uri getStepThumbUri() {
-        if (recipe != null && recipe.getLastStepImage() != null)
-            return Uri.parse(recipe.getLastStepImage());
+        if (recipe != null && recipe.getRecipeAvailableImage() != null)
+            return Uri.parse(recipe.getRecipeAvailableImage());
 
         return null;
     }

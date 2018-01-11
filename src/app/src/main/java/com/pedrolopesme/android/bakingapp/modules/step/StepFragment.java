@@ -53,6 +53,7 @@ public final class StepFragment extends ViewModelFragment {
     public static final String STEP_BUNDLE_KEY = "STEP_BUNDLE_KEY";
     public static final String COLUMNS_BUNDLE_NAME = "stepFragmentColumns";
     public static final String LANDSCAPE_MODE = "stepLandscapeMode";
+    public static final String VIDEO_POSITION = "VIDEO_POSITION";
 
     private StepViewModel stepViewModel;
     private Recipe recipe;
@@ -60,11 +61,13 @@ public final class StepFragment extends ViewModelFragment {
     private BandwidthMeter bandwidthMeter;
     private Handler mainHandler;
     private SimpleExoPlayer player;
+    private long videoPosition = 0;
 
     @BindView(R.id.vv_step_video)
     protected SimpleExoPlayerView simpleExoPlayerView;
 
-    @Nullable @BindView(R.id.iv_step_thumb)
+    @Nullable
+    @BindView(R.id.iv_step_thumb)
     protected ImageView thumbImage;
 
 
@@ -76,6 +79,10 @@ public final class StepFragment extends ViewModelFragment {
         step = extractStepFromArguments();
         mainHandler = new Handler();
         bandwidthMeter = new DefaultBandwidthMeter();
+
+        if (savedInstanceState != null) {
+            videoPosition = savedInstanceState.getLong(VIDEO_POSITION);
+        }
 
         if (recipe == null || step == null)
             return createViewStepNotFound(inflater, container, savedInstanceState);
@@ -142,6 +149,7 @@ public final class StepFragment extends ViewModelFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // getStepThumbUri() returns an URI, so I cannot use the TextUtils.isEmpty verification
         if (thumbImage != null && stepViewModel.getStepThumbUri() != null) {
             Picasso.with(getContext()).load(stepViewModel.getStepThumbUri()).into(thumbImage);
         }
@@ -170,6 +178,7 @@ public final class StepFragment extends ViewModelFragment {
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             player.prepare(mediaSource);
             player.setPlayWhenReady(true);
+            player.seekTo(videoPosition);
         }
     }
 
@@ -179,6 +188,16 @@ public final class StepFragment extends ViewModelFragment {
         Log.d(getTagName(), "Creating step view model");
         stepViewModel = new StepViewModel(getContext(), savedViewModelState);
         return stepViewModel;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        long position = 0;
+        if (player != null) {
+            position = player.getCurrentPosition();
+        }
+        outState.putLong(VIDEO_POSITION, position);
     }
 
     public void setRecipe(Recipe recipe) {
@@ -224,4 +243,44 @@ public final class StepFragment extends ViewModelFragment {
                 return new StepsNavigation(StepsNavigation.Panels.ONE, getContext(), getFragmentManager(), recipe);
         }
     }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (player != null) {
+            player.stop();
+            player.release();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (player != null) {
+            player.stop();
+            player.release();
+            player = null;
+        }
+    }
+
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (player != null) {
+            player.stop();
+            player.release();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (player != null) {
+            player.stop();
+            player.release();
+        }
+    }
+
 }
